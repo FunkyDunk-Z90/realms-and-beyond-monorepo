@@ -1,0 +1,73 @@
+@use '../_variables' as *;
+@use '../_mixins' as *;
+
+.btn {
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    padding: $medium $medium;
+    background-color: var(--primary-color);
+    color: $light;
+    max-height: max-content;
+    max-width: max-content;
+    min-width: 80px;
+
+    @include border;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &.accent {
+        background-color: var(--accent-color);
+
+        &:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0px 1px 2px 0px var(--accent-color);
+        }
+    }
+    &.danger {
+        background-color: var(--danger-color);
+
+        &:hover {
+            border-color: var(--danger-color);
+            box-shadow: 0px 1px 2px 0px var(--danger-color);
+        }
+    }
+    &.warning {
+        background-color: var(--warning-color);
+        color: $dark;
+
+        &:hover {
+            border-color: var(--warning-color);
+            box-shadow: 0px 1px 2px 0px var(--warning-color);
+        }
+    }
+    &.submit {
+        background-color: var(--submit-color);
+
+        &:hover {
+            border-color: var(--submit-color);
+            box-shadow: 0px 1px 2px 0px var(--submit-color);
+        }
+    }
+    &.success {
+        background-color: var(--success-color);
+
+        &:hover {
+            border-color: var(--success-color);
+            box-shadow: 0px 1px 2px 0px var(--success-color);
+        }
+    }
+    &.disabled {
+        cursor: not-allowed;
+        background-color: var(--disabled-color);
+        color: $light;
+
+        &:hover {
+            opacity: 1;
+            background-color: var(--disabled-color);
+            box-shadow: 0px 1px 2px 0px var(--disabled-color);
+        }
+    }
+}

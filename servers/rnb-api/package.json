@@ -1,0 +1,37 @@
+{
+  "name": "@/rnb-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc",
+    "start": "node dist/server.js"
+  },
+  "dependencies": {
+    "@rnb/types": "workspace:*",
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.8.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "envalid": "^8.1.1",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.18.0",
+    "morgan": "^1.10.1",
+    "postman": "^0.2.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^24.3.0",
+    "mailtrap": "^4.4.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.9.2"
+  }
+}

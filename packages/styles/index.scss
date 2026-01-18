@@ -1,0 +1,87 @@
+@use '_variables' as *;
+@use '_mixins' as *;
+
+@use './components/sidebar';
+@use './components/dropdown';
+@use './components/navbar';
+@use './components/button';
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+    -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+    --bg-color: #{$light};
+    --bg-secondary-color: #{$light-secondary};
+    --text-color: #{$dark};
+    --primary-color: #{$primary};
+    --accent-color: #{$accent};
+    --danger-color: #{$danger};
+    --warning-color: #{$warning};
+    --submit-color: #{$submit};
+    --success-color: #{$success};
+    --disabled-color: #{$disabled};
+    --text-box: #{$light-secondary};
+    --border-color: #{$border-light};
+    --sidebar-max: #{$sidebar-max};
+    --sidebar-min: #{$sidebar-min};
+    --header-height: #{$header-height};
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #{$dark};
+        --bg-secondary-color: #{$dark-secondary};
+        --text-color: #{$light};
+        --border-color: #{$border-dark};
+    }
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    text-align: center;
+    line-height: 1.2;
+    user-select: none;
+    cursor: default;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+a {
+    text-decoration: none;
+    font-size: 1rem;
+    color: var(--text-color);
+    width: max-content;
+
+    &:hover {
+        color: var(--primary-color);
+    }
+}
+
+li {
+    list-style: none;
+}
+
+input::-webkit-inner-spin-button {
+    display: none;
+}
+
+.app-wrapper {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    height: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+    min-height: calc(var(--vh, 1vh) * 100);
+}

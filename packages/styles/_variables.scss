@@ -1,0 +1,38 @@
+// Colours
+$dark: #181818;
+$dark-secondary: #353535;
+$dark-blur: #1e1e1e9f;
+$light: #e0e0e0;
+$light-secondary: #ebebeb;
+$light-blur: #e0e0e06e;
+$primary: #80466e;
+$accent: #cfae70;
+$danger: #b0182c;
+$warning: #dbd02e;
+$success: #29971f;
+$submit: #1f5d97;
+$disabled: #adadad;
+
+// Spacings
+$small: 0.3rem;
+$medium: 0.5rem;
+$large: 1rem;
+$xLarge: 1.5rem;
+
+// Border & Radius
+$border-dark: 1px solid $dark-secondary;
+$border-light: 1px solid $light-secondary;
+$border-radius: 4px;
+
+// Screen Sizes
+$tablet: 768px;
+$desktop: 1025px;
+
+// Containers
+$gallery-50px: repeat(auto-fit, minmax(calc(50px), 1fr));
+$gallery-100px: repeat(auto-fit, minmax(calc(100px), 1fr));
+
+// Sizes
+$sidebar-max: 400px;
+$sidebar-min: 125px;
+$header-height: 62px;
