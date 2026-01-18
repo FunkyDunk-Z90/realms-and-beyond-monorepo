@@ -2,6 +2,7 @@ import { Schema, model, Document } from 'mongoose'
 import bcrypt from 'bcrypt'
 import { createHash, randomBytes } from 'crypto'
 import { I_Identity } from '@rnb/types'
+import { formatDate } from '../utils/formateDate'
 
 interface I_IdentityDocument extends Omit<I_Identity, 'id'>, Document {
     password: string
@@ -165,10 +166,10 @@ identitySchema.methods.getPublicInfo = function (): Partial<I_Identity> {
             address: this.contact.address,
         },
         lifecycle: this.lifecycle,
-        lastLoginAt: this.lastLoginAt,
+        lastLoginAt: formatDate(this.lastLoginAt),
         accounts: this.accounts,
-        createdAt: this.createdAt,
-        updatedAt: this.updatedAt,
+        createdAt: formatDate(this.createdAt),
+        updatedAt: formatDate(this.updatedAt),
     }
 }
 
