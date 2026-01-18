@@ -20,8 +20,6 @@ export interface I_IdentityProfile {
 
 export interface I_Identity {
     id: T_ObjectId
-    password: string
-    passwordConfirm?: string
     profile: I_IdentityProfile
     contact: I_ContactProps
     lifecycle: I_IdentityLifecycle

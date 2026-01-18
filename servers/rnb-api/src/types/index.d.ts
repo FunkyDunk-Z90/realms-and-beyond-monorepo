@@ -1,9 +1,9 @@
-import { iUser, iUserDoc } from '../models/userModel'
+import { I_Identity } from '@rnb/types'
 
 declare global {
     namespace Express {
         export interface Request {
-            user?: string | iUserDoc | iUser
+            user?: string | I_Identity
         }
     }
 }

@@ -5,9 +5,11 @@ import bcrypt from 'bcrypt'
 import { createHash } from 'crypto'
 import { Types } from 'mongoose'
 import cloudinary from '../config/cloudinary'
+import { I_Identity } from '@rnb/types'
 
 // Models
 import User from '../models/userCoreModel'
+import Identity from '../models/identityModel'
 
 // Utils
 import { createToken, extractToken } from '../utils/jwtTokens'
@@ -20,11 +22,9 @@ const signUp: RequestHandler = async (req, res, next) => {
         firstName,
         lastNames,
         dateOfBirth,
-        placeOfBirth,
         nationality,
         email,
-        phoneNumber,
-        address,
+        contact,
         password,
         passwordConfirm,
     } = req.body
@@ -35,12 +35,12 @@ const signUp: RequestHandler = async (req, res, next) => {
         !lastNames ||
         !dateOfBirth ||
         !email ||
+        !contact ||
         !password ||
         !passwordConfirm
     ) {
         return res.status(400).json({
-            message:
-                'Please provide: firstName, lastNames, dateOfBirth, email, password, and passwordConfirm',
+            message: 'Please provide all requested information',
         })
     }
 
@@ -52,31 +52,13 @@ const signUp: RequestHandler = async (req, res, next) => {
     }
 
     try {
-        // Upload default avatar to Cloudinary
-        const result = await cloudinary.uploader.upload(
-            env.USER_DEFAULT_AVATAR,
-            {
-                public_id: email.split('@')[0],
-                folder: 'user-avatars',
-            }
-        )
-
         // Create new user with nested basicInfo structure
-        const newUser = await User.create({
-            basicInfo: {
-                firstName,
-                lastNames,
-                dateOfBirth,
-                placeOfBirth,
-                nationality,
-                userRoles: ['user'], // Default role
-                userStatus: 'active',
-                contact: {
-                    email,
-                    phoneNumber,
-                    address: address || {},
-                },
-            },
+        const newUser = await Identity.create({
+            firstName,
+            lastNames,
+            dateOfBirth,
+            nationality,
+            contact,
             password,
             passwordConfirm,
         })
