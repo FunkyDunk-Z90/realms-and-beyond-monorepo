@@ -1,5 +1,5 @@
 import { T_ObjectId, T_Timestamp } from '../globalTypes'
-import { I_ContactProps } from '../rnbTypesIndex'
+import { I_ContactProps } from '..'
 
 export type T_IdentityStatus = 'active' | 'soft-deleted' | 'banned'
 
