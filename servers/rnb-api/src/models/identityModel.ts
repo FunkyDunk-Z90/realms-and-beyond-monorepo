@@ -1,46 +1,84 @@
-import { Schema, model } from 'mongoose'
-import { hash, compare } from 'bcrypt'
+import { Schema, model, Document } from 'mongoose'
+import bcrypt from 'bcrypt'
+import { createHash, randomBytes } from 'crypto'
 import { I_Identity } from '@rnb/types'
-import { contactSchema } from './contactModel'
+import { formatDate } from '../utils/formateDate'
 
-const identitySchema = new Schema<I_Identity>(
+interface I_IdentityDocument extends Omit<I_Identity, 'id'>, Document {
+    password: string
+    passwordConfirm?: string
+    passwordChangedAt?: Date
+    passwordResetToken?: string
+    passwordResetExpiresIn?: Date
+    correctPassword(
+        candidatePassword: string,
+        userPassword: string
+    ): Promise<boolean>
+    changedPasswordAfter(JWTTimestamp: Date): boolean
+    createPasswordResetToken(): string
+    getPublicInfo(): Partial<I_Identity>
+}
+
+const identitySchema = new Schema<I_IdentityDocument>(
     {
         password: {
             type: String,
-            required: true,
+            required: [true, 'Password is required'],
+            minlength: 9,
             select: false,
         },
         passwordConfirm: {
             type: String,
-            required: [true, 'please confirm password'],
             validate: {
-                validator: function (this: I_Identity, value: string): boolean {
-                    return value === this.password
+                validator: function (this: I_IdentityDocument, val: string) {
+                    return val === this.password
                 },
-                message: 'passwords do not match!',
+                message: 'Passwords do not match',
             },
-            select: false,
         },
-
         profile: {
             firstName: {
                 type: String,
-                required: true,
+                required: [true, 'First name is required'],
+                trim: true,
             },
             lastNames: {
                 type: [String],
-                required: true,
+                required: [true, 'Last names are required'],
+                validate: {
+                    validator: (v: string[]) => v && v.length > 0,
+                    message: 'At least one last name is required',
+                },
             },
-            dateOfBirth: String,
-            placeOfBirth: String,
-            nationality: String,
+            dateOfBirth: {
+                type: String,
+            },
+            nationality: {
+                type: String,
+            },
         },
-
         contact: {
-            type: contactSchema,
-            required: true,
+            email: {
+                type: String,
+                required: [true, 'Email is required'],
+                unique: true,
+                lowercase: true,
+                trim: true,
+                match: [/^\S+@\S+\.\S+$/, 'Please provide a valid email'],
+            },
+            phoneNumber: {
+                type: String,
+                trim: true,
+            },
+            address: {
+                addressLine1: String,
+                addressLine2: String,
+                city: String,
+                state: String,
+                postcode: String,
+                country: String,
+            },
         },
-
         lifecycle: {
             status: {
                 type: String,
@@ -50,29 +88,91 @@ const identitySchema = new Schema<I_Identity>(
             deletedAt: Date,
             recoverableUntil: Date,
         },
-
+        lastLoginAt: {
+            type: Date,
+        },
         accounts: [
             {
                 type: Schema.Types.ObjectId,
+                refPath: 'accountModel',
             },
         ],
-
-        lastLoginAt: Date,
+        passwordChangedAt: Date,
+        passwordResetToken: String,
+        passwordResetExpiresIn: Date,
     },
-    { timestamps: true }
+    {
+        timestamps: true,
+        toJSON: { virtuals: true },
+        toObject: { virtuals: true },
+    }
 )
 
+// Indexes
+identitySchema.index({ 'contact.email': 1 })
+identitySchema.index({ 'lifecycle.status': 1 })
+
+// Pre-save middleware for password hashing
 identitySchema.pre('save', async function (next) {
     if (!this.isModified('password')) return next()
-    this.password = await hash(this.password, 12)
+
+    this.password = await bcrypt.hash(this.password, 12)
+    this.passwordConfirm = undefined
+
+    if (!this.isNew) {
+        this.passwordChangedAt = new Date(Date.now() - 1000)
+    }
+
     next()
 })
 
-identitySchema.methods.correctPassword = function (
-    candidate: string,
-    stored: string
-) {
-    return compare(candidate, stored)
+// Instance methods
+identitySchema.methods.correctPassword = async function (
+    candidatePassword: string,
+    userPassword: string
+): Promise<boolean> {
+    return await bcrypt.compare(candidatePassword, userPassword)
 }
 
-export const Identity = model<I_Identity>('Identity', identitySchema)
+identitySchema.methods.changedPasswordAfter = function (
+    JWTTimestamp: Date
+): boolean {
+    if (this.passwordChangedAt) {
+        const changedTimestamp = this.passwordChangedAt.getTime()
+        return JWTTimestamp.getTime() < changedTimestamp
+    }
+    return false
+}
+
+identitySchema.methods.createPasswordResetToken = function (): string {
+    const resetToken = randomBytes(32).toString('hex')
+
+    this.passwordResetToken = createHash('sha256')
+        .update(resetToken)
+        .digest('hex')
+
+    this.passwordResetExpiresIn = new Date(Date.now() + 10 * 60 * 1000) // 10 minutes
+
+    return resetToken
+}
+
+identitySchema.methods.getPublicInfo = function (): Partial<I_Identity> {
+    return {
+        id: this._id,
+        profile: this.profile,
+        contact: {
+            email: this.contact.email,
+            phoneNumber: this.contact.phoneNumber,
+            address: this.contact.address,
+        },
+        lifecycle: this.lifecycle,
+        lastLoginAt: formatDate(this.lastLoginAt),
+        accounts: this.accounts,
+        createdAt: formatDate(this.createdAt),
+        updatedAt: formatDate(this.updatedAt),
+    }
+}
+
+const Identity = model<I_IdentityDocument>('Identity', identitySchema)
+
+export default Identity

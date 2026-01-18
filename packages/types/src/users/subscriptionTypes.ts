@@ -15,6 +15,7 @@ export type T_SubscriptionTier =
 export type T_SubscriptionStatus = 'active' | 'paused' | 'cancelled' | 'expired'
 
 export type T_RenewelCycle =
+    | 'never'
     | '1-month'
     | '3-months'
     | '6-months'

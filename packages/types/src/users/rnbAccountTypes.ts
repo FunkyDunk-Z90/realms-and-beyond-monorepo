@@ -9,7 +9,7 @@ export interface I_RnBContent {
 
 export interface I_RnBAccount {
     identityId: T_ObjectId
-    userName: string
+    username: string
     avatar?: string
     content: I_RnBContent
     subscription?: I_SubscriptionProps
