@@ -12,6 +12,7 @@ export const Button = ({
     const defaultBtnType = !btnType ? 'button' : btnType
     return (
         <button
+            suppressHydrationWarning
             onClick={handleClick}
             disabled={isDisabled}
             className={`btn ${btnTheme}`}

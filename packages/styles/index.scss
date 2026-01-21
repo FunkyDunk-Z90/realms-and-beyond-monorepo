@@ -5,6 +5,8 @@
 @use './components/dropdown';
 @use './components/navbar';
 @use './components/button';
+@use './components/form';
+@use './components/header';
 
 *,
 *::before,
@@ -84,4 +86,11 @@ input::-webkit-inner-spin-button {
     min-height: 100vh;
     min-height: 100dvh;
     min-height: calc(var(--vh, 1vh) * 100);
+}
+
+.page-wrapper {
+    display: grid;
+    height: 100%;
+    justify-items: center;
+    align-items: center;
 }

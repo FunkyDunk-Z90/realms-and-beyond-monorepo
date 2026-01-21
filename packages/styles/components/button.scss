@@ -11,11 +11,16 @@
     max-height: max-content;
     max-width: max-content;
     min-width: 80px;
-
-    @include border;
+    border: none;
+    border-radius: $border-radius;
+    opacity: 0.8;
 
     &:hover {
-        opacity: 0.8;
+        opacity: 1;
+    }
+
+    &:active {
+        transform: translateY(-1);
     }
 
     &.accent {

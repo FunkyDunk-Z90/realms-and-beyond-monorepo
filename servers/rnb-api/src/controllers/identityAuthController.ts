@@ -20,13 +20,6 @@ export const signUpIdentity: RequestHandler = async (req, res, next) => {
         })
     }
 
-    // Validate lastNames is an array
-    if (!Array.isArray(lastNames) || lastNames.length === 0) {
-        return res.status(400).json({
-            message: 'lastNames must be a non-empty array',
-        })
-    }
-
     try {
         // Create new identity
         const newIdentity = await Identity.create({

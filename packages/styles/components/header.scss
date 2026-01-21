@@ -1,0 +1,32 @@
+@use '../_variables' as *;
+@use '../_mixins' as *;
+
+.wrapper-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    border-bottom: 1px var(--bg-secondary-color) solid;
+    box-shadow: 0px 2px 2px 0px var(--bg-secondary-color);
+    padding-block: $medium;
+    padding-inline: $large;
+    background-color: var(--bg-secondary-color);
+}
+
+.logo-company {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.title-company {
+    font-weight: lighter;
+    cursor: pointer;
+    width: max-content;
+}
+
+.title-wrapper {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}

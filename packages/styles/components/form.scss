@@ -1,0 +1,48 @@
+@use '../_variables' as *;
+@use '../_mixins' as *;
+
+.form-container {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    gap: $large;
+    padding: $large;
+    max-width: max-content;
+    max-height: max-content;
+    background-color: var(--bg-secondary-color);
+    text-align: start;
+
+    @include border;
+}
+
+.form-input-container {
+    position: relative;
+    display: grid;
+    padding: $small;
+}
+
+.form-input {
+    justify-content: center;
+    height: 30px;
+    padding-inline: $small;
+    outline-color: $primary;
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+.form-label {
+    font-family: inherit;
+    margin-bottom: $medium;
+    font-weight: bold;
+}
+
+.password-visibilty {
+    position: absolute;
+    top: 75%;
+    right: 5%;
+    padding-bottom: $small;
+    transform: translateY(-50%);
+    cursor: pointer;
+    height: max-content;
+    width: max-content;
+}
