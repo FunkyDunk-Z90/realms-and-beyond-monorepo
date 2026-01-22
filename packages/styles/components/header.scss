@@ -3,18 +3,25 @@
 
 .wrapper-header {
     display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: center;
     border-bottom: 1px var(--bg-secondary-color) solid;
     box-shadow: 0px 2px 2px 0px var(--bg-secondary-color);
     padding-block: $medium;
     padding-inline: $large;
     background-color: var(--bg-secondary-color);
+    min-height: 60px;
+}
+
+.header-contents {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: $large;
 }
 
 .logo-company {
-    height: 50px;
-    width: 50px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -27,6 +34,6 @@
 
 .title-wrapper {
     display: flex;
-    justify-content: space-around;
+    justify-content: start;
     width: 100%;
 }

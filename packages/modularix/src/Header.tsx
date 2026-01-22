@@ -24,26 +24,31 @@ export const Header = ({
 
     return (
         <div className="wrapper-header">
-            {companyLogo && (
-                <Image
-                    src={companyLogo}
-                    alt={`${companyName}'s logo`}
-                    className="logo-company"
-                    onClick={() => handleNavigate()}
-                />
-            )}
-            {companyBanner && (
-                <Image
-                    src={companyBanner}
-                    alt={`${companyName}'s banner`}
-                    className="banner-company"
-                    onClick={() => handleNavigate()}
-                />
-            )}
-            <div className="title-wrapper">
-                <h1 className="title-company" onClick={() => handleNavigate()}>
-                    {companyName}
-                </h1>
+            <div className="header-contents">
+                {companyLogo && (
+                    <Image
+                        src={companyLogo}
+                        alt={`${companyName}'s logo`}
+                        className="logo-company"
+                        onClick={() => handleNavigate()}
+                    />
+                )}
+                {companyBanner && (
+                    <Image
+                        src={companyBanner}
+                        alt={`${companyName}'s banner`}
+                        className="banner-company"
+                        onClick={() => handleNavigate()}
+                    />
+                )}
+                <div className="title-wrapper">
+                    <h1
+                        className="title-company"
+                        onClick={() => handleNavigate()}
+                    >
+                        {companyName}
+                    </h1>
+                </div>
             </div>
         </div>
     )
