@@ -5,5 +5,7 @@ export * from './Sidebar'
 export * from './Navbar'
 export * from './Button'
 
+// export * from './forms/SignUpForm'
+
 export * from './layout/Header'
 export * from './layout/Footer'

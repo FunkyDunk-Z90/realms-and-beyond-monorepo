@@ -5,7 +5,8 @@
 @use './components/dropdown';
 @use './components/navbar';
 @use './components/button';
-@use './components/form';
+
+@use './components/forms/form';
 
 @use './components/layout/header';
 @use './components/layout/footer';

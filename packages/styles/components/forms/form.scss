@@ -1,14 +1,20 @@
-@use '../_variables' as *;
-@use '../_mixins' as *;
+@use '../../_variables' as *;
+@use '../../_mixins' as *;
 
-.form-container {
+.form-wrapper {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    padding: $large;
+}
+
+.form-contents {
     display: grid;
     justify-items: center;
     align-items: center;
     gap: $large;
     padding: $large;
-    max-width: max-content;
-    max-height: max-content;
+    max-width: min-content;
     background-color: var(--bg-secondary-color);
     text-align: start;
 
@@ -19,6 +25,7 @@
     position: relative;
     display: grid;
     padding: $small;
+    max-width: $tablet;
 }
 
 .form-input {
@@ -28,6 +35,11 @@
     outline-color: $primary;
     font-family: inherit;
     font-size: 1rem;
+    width: 300px;
+
+    &.alert {
+        outline-color: red;
+    }
 }
 
 .form-label {
@@ -45,4 +57,16 @@
     cursor: pointer;
     height: max-content;
     width: max-content;
+}
+
+.error-message-wrapper {
+    display: grid;
+    justify-items: start;
+    gap: $small;
+    padding-inline: $medium;
+    width: 100%;
+}
+
+.error-message {
+    color: var(--warning-color);
 }
