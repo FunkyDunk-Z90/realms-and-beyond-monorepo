@@ -17,6 +17,13 @@
     grid-template-columns: auto 1fr;
     align-items: center;
     gap: $large;
+    width: 100%;
+    margin-inline: auto;
+
+    // @media (min-width: $desktop) {
+    //     margin-inline: auto;
+    //     max-width: $desktop;
+    // }
 }
 
 .logo-company {
@@ -33,7 +40,13 @@
 }
 
 .title-wrapper {
+    position: absolute;
     display: flex;
-    justify-content: start;
+    justify-content: center;
     width: 100%;
+
+    @media (min-width: $tablet) {
+        position: relative;
+        justify-content: start;
+    }
 }

@@ -38,7 +38,7 @@
     width: 300px;
 
     &.alert {
-        outline-color: red;
+        outline-color: var(--danger-color);
     }
 }
 
