@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react'
-import { Header } from '@rnb/modularix'
+import { Header, Footer } from '@rnb/modularix'
 
 import '@rnb/styles'
 
-import { Logo } from '../../../packages/assets'
+import { Logo } from '@rnb/assets'
 
 export const metadata = {
     title: 'Nexus Anvil',
@@ -20,6 +20,10 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                     navigationLink="dashboard"
                 />
                 {children}
+                <Footer
+                    companyName={'Realms & Beyond'}
+                    copyright="@copyright RealmsAndBeyond ltd. 2026"
+                />
             </body>
         </html>
     )

@@ -6,7 +6,9 @@
 @use './components/navbar';
 @use './components/button';
 @use './components/form';
-@use './components/header';
+
+@use './components/layout/header';
+@use './components/layout/footer';
 
 *,
 *::before,
