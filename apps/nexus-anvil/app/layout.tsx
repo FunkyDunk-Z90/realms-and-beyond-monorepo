@@ -3,7 +3,7 @@ import { Header, Footer } from '@rnb/modularix'
 
 import '@rnb/styles'
 
-import { Logo } from '@rnb/assets'
+import Logo from '../assets/dragon.jpg'
 
 export const metadata = {
     title: 'Nexus Anvil',
