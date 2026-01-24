@@ -1,0 +1,20 @@
+@use '../../_variables' as *;
+@use '../../_mixins' as *;
+
+.footer-wrapper {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    height: 80px;
+    background-color: var(--bg-secondary-color);
+    border-top: 1px var(--bg-secondary-color) solid;
+    box-shadow: 0px 2px 4px 2px var(--bg-secondary-color);
+}
+
+.footer-copyright {
+    font-weight: bold;
+}
+
+.footer-company-name {
+    font-weight: lighter;
+}

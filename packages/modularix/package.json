@@ -14,8 +14,9 @@
         "react-dom": "^18.0.0"
     },
     "dependencies": {
-        "@rnb/types": "workspace:*",
         "@rnb/styles": "workspace:*",
+        "@rnb/types": "workspace:*",
+        "axios": "^1.13.2",
         "sass": "^1.97.0"
     },
     "devDependencies": {

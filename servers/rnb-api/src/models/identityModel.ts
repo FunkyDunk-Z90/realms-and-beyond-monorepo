@@ -43,12 +43,9 @@ const identitySchema = new Schema<I_IdentityDocument>(
                 trim: true,
             },
             lastNames: {
-                type: [String],
+                type: String,
                 required: [true, 'Last names are required'],
-                validate: {
-                    validator: (v: string[]) => v && v.length > 0,
-                    message: 'At least one last name is required',
-                },
+                trim: true,
             },
             dateOfBirth: {
                 type: String,
@@ -108,9 +105,9 @@ const identitySchema = new Schema<I_IdentityDocument>(
     }
 )
 
-// Indexes
-identitySchema.index({ 'contact.email': 1 })
-identitySchema.index({ 'lifecycle.status': 1 })
+// // Indexes
+// identitySchema.index({ 'contact.email': 1 })
+// identitySchema.index({ 'lifecycle.status': 1 })
 
 // Pre-save middleware for password hashing
 identitySchema.pre('save', async function (next) {

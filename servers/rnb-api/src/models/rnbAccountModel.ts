@@ -114,8 +114,8 @@ const rnbAccountSchema = new Schema<I_RnBAccountDocument>(
 )
 
 // Indexes
-rnbAccountSchema.index({ identityId: 1 })
-rnbAccountSchema.index({ userName: 1 })
+// rnbAccountSchema.index({ identityId: 1 })
+// rnbAccountSchema.index({ userName: 1 })
 
 // Instance methods
 rnbAccountSchema.methods.getPublicInfo = function (): Partial<I_RnBAccount> {

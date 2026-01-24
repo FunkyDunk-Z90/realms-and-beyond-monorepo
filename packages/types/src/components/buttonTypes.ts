@@ -12,7 +12,7 @@ type T_BtnTheme =
 
 export interface I_ButtonProps {
     children: React.ReactNode
-    handleClick: (e?: T_ButtonEvent | undefined) => void
+    handleClick?: (e?: T_ButtonEvent | undefined) => void
     isDisabled?: boolean
     theme?: T_BtnTheme
     btnType?: T_BtnTypes

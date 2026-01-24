@@ -3,8 +3,6 @@ import { I_ContactProps } from '..'
 
 export type T_IdentityStatus = 'active' | 'soft-deleted' | 'banned'
 
-export type T_UserRoles = 'user' | 'admin' | 'executive-admin'
-
 export interface I_IdentityLifecycle {
     status: T_IdentityStatus
     deletedAt?: T_Timestamp
@@ -13,7 +11,7 @@ export interface I_IdentityLifecycle {
 
 export interface I_IdentityProfile {
     firstName: string
-    lastNames: string[]
+    lastNames: string
     dateOfBirth?: string
     nationality?: string
 }

@@ -10,11 +10,13 @@ export const Button = ({
 }: I_ButtonProps) => {
     const btnTheme = !theme ? '' : theme
     const defaultBtnType = !btnType ? 'button' : btnType
+
     return (
         <button
+            suppressHydrationWarning
             onClick={handleClick}
             disabled={isDisabled}
-            className={`btn ${btnTheme}`}
+            className={`btn ${!isDisabled ? btnTheme : 'disabled'}`}
             type={defaultBtnType}
             ref={withRef}
             role="button"
