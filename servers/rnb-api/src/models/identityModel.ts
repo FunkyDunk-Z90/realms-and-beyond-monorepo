@@ -43,12 +43,9 @@ const identitySchema = new Schema<I_IdentityDocument>(
                 trim: true,
             },
             lastNames: {
-                type: [String],
+                type: String,
                 required: [true, 'Last names are required'],
-                validate: {
-                    validator: (v: string[]) => v && v.length > 0,
-                    message: 'At least one last name is required',
-                },
+                trim: true,
             },
             dateOfBirth: {
                 type: String,
