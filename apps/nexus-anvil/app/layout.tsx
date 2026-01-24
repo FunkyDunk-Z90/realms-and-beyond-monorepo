@@ -25,7 +25,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                             navigationLink="dashboard"
                         />
                         <section className="page-wrapper">
-                            <AuthRouter>{children}</AuthRouter>
+                            {/* <AuthRouter> */}
+                            {children}
+                            {/* </AuthRouter> */}
                         </section>
                         <Footer
                             companyName={'Nexus Anvil'}

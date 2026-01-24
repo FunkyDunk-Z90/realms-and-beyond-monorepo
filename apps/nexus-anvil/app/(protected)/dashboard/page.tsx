@@ -1,13 +1,58 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+
 import { useUser } from '@/lib/context/UserContext'
 import { useRnBAccount } from '@/lib/context/NexusAnvilContext'
+import { I_RnBAccount } from '@rnb/types'
+
+import { Button } from '@rnb/modularix'
+
+import Avatar from '../../../assets/dragon.jpg'
+
+const offlineRnBAccount: I_RnBAccount = {
+    username: 'FunkyDunk-Z90',
+    avatar: Avatar,
+    createdAt: '01/01/2026',
+    identityId: '0015674',
+    content: {
+        campaigns: [
+            {
+                contentId: 'campaign-001',
+                contentName: 'The Aetherscape Saga',
+            },
+        ],
+        playerCharacters: [
+            {
+                contentId: 'character-001',
+                contentName: 'Bruce Wayne',
+            },
+            {
+                contentId: 'character-002',
+                contentName: 'Clark Kent',
+            },
+            {
+                contentId: 'character-003',
+                contentName: 'Peter Parker',
+            },
+        ],
+        worlds: [
+            {
+                contentId: 'world-001',
+                contentName: 'Oru',
+            },
+        ],
+    },
+    updatedAt: '01/01/2026',
+}
 
 export default function Dashboard() {
     const router = useRouter()
     const { user, logout } = useUser()
-    const { rnbAccount, hasRnBAccount, isLoading } = useRnBAccount()
+    // const { rnbAccount, hasRnBAccount, isLoading } = useRnBAccount()
+    const hasRnBAccount = true
+    const isLoading = false
 
     const handleLogout = async () => {
         try {
@@ -113,172 +158,62 @@ export default function Dashboard() {
     }
 
     // User has RnB account - show full dashboard
+
+    const { username, content, identityId, avatar, subscription } =
+        offlineRnBAccount
     return (
-        <div className="min-h-screen bg-gray-100">
-            <nav className="bg-white shadow">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex justify-between h-16">
-                        <div className="flex items-center">
-                            <h1 className="text-xl font-bold text-gray-900">
-                                Realms & Beyond
-                            </h1>
-                        </div>
-                        <div className="flex items-center space-x-4">
-                            <div className="flex items-center">
-                                {rnbAccount?.avatar && (
-                                    <img
-                                        src={rnbAccount.avatar}
-                                        alt={rnbAccount.username}
-                                        className="h-8 w-8 rounded-full mr-2"
-                                    />
-                                )}
-                                <span className="text-sm font-medium text-gray-700">
-                                    {rnbAccount?.username}
-                                </span>
-                            </div>
-                            <button
-                                onClick={handleLogout}
-                                className="px-4 py-2 text-sm font-medium text-white bg-red-600 hover:bg-red-700 rounded-md"
-                            >
-                                Logout
-                            </button>
-                        </div>
+        <div className="dashboard-wrapper">
+            <h2>Welcome back, {username}!</h2>
+            <div className="section-wrapper">
+                <h2>My Account</h2>
+                <div className="profile-info-wrapper">
+                    <div className="profile-avatar-wrapper">
+                        {avatar && (
+                            <Image
+                                src={avatar}
+                                alt={username}
+                                className="user-avatar"
+                            />
+                        )}
                     </div>
                 </div>
-            </nav>
-
-            <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
-                <div className="px-4 py-6 sm:px-0">
-                    <div className="mb-6">
-                        <h2 className="text-3xl font-bold text-gray-900">
-                            Welcome back, {rnbAccount?.username}!
-                        </h2>
-                        <p className="text-gray-600 mt-1">
-                            Here's your adventure hub
-                        </p>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-                        <div className="bg-white overflow-hidden shadow rounded-lg">
-                            <div className="p-5">
-                                <div className="flex items-center">
-                                    <div className="flex-1">
-                                        <dt className="text-sm font-medium text-gray-500 truncate">
-                                            Player Characters
-                                        </dt>
-                                        <dd className="mt-1 text-3xl font-semibold text-gray-900">
-                                            {rnbAccount?.content
-                                                .playerCharacters.length || 0}
-                                        </dd>
-                                    </div>
-                                </div>
-                            </div>
+            </div>
+            <div className="adventure-hub-wrapper">
+                <h3 className="section-title">Adventure Hub</h3>
+                <div className="card-gallery-wrapper">
+                    <h4>Characters</h4>
+                    {content.playerCharacters.map((el) => (
+                        <div
+                            className="card-wrapper"
+                            key={el.contentId as string}
+                        >
+                            <p>{el.contentName}</p>
                         </div>
-
-                        <div className="bg-white overflow-hidden shadow rounded-lg">
-                            <div className="p-5">
-                                <div className="flex items-center">
-                                    <div className="flex-1">
-                                        <dt className="text-sm font-medium text-gray-500 truncate">
-                                            Worlds
-                                        </dt>
-                                        <dd className="mt-1 text-3xl font-semibold text-gray-900">
-                                            {rnbAccount?.content.worlds
-                                                .length || 0}
-                                        </dd>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="bg-white overflow-hidden shadow rounded-lg">
-                            <div className="p-5">
-                                <div className="flex items-center">
-                                    <div className="flex-1">
-                                        <dt className="text-sm font-medium text-gray-500 truncate">
-                                            Campaigns
-                                        </dt>
-                                        <dd className="mt-1 text-3xl font-semibold text-gray-900">
-                                            {rnbAccount?.content.campaigns
-                                                .length || 0}
-                                        </dd>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {rnbAccount?.subscription && (
-                        <div className="bg-white shadow rounded-lg p-6 mb-6">
-                            <h3 className="text-lg font-medium text-gray-900 mb-4">
-                                Subscription Details
-                            </h3>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <p className="text-sm text-gray-500">
-                                        Tier
-                                    </p>
-                                    <p className="text-base font-medium text-gray-900 capitalize">
-                                        {rnbAccount.subscription.tier}
-                                    </p>
-                                </div>
-                                <div>
-                                    <p className="text-sm text-gray-500">
-                                        Status
-                                    </p>
-                                    <p className="text-base font-medium text-gray-900 capitalize">
-                                        {rnbAccount.subscription.status}
-                                    </p>
-                                </div>
-                                {rnbAccount.subscription.renewsOn && (
-                                    <div>
-                                        <p className="text-sm text-gray-500">
-                                            Renews On
-                                        </p>
-                                        <p className="text-base font-medium text-gray-900">
-                                            {new Date(
-                                                rnbAccount.subscription.renewsOn
-                                            ).toLocaleDateString()}
-                                        </p>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    )}
-
-                    <div className="bg-white shadow rounded-lg p-6">
-                        <h3 className="text-lg font-medium text-gray-900 mb-4">
-                            Quick Actions
-                        </h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                            <button className="p-4 border border-gray-300 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition text-left">
-                                <h4 className="font-medium text-gray-900">
-                                    Create Character
-                                </h4>
-                                <p className="text-sm text-gray-500 mt-1">
-                                    Start a new adventure
-                                </p>
-                            </button>
-                            <button className="p-4 border border-gray-300 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition text-left">
-                                <h4 className="font-medium text-gray-900">
-                                    Build World
-                                </h4>
-                                <p className="text-sm text-gray-500 mt-1">
-                                    Create your realm
-                                </p>
-                            </button>
-                            <button className="p-4 border border-gray-300 rounded-lg hover:border-indigo-500 hover:bg-indigo-50 transition text-left">
-                                <h4 className="font-medium text-gray-900">
-                                    Start Campaign
-                                </h4>
-                                <p className="text-sm text-gray-500 mt-1">
-                                    Launch a new story
-                                </p>
-                            </button>
-                        </div>
-                    </div>
+                    ))}
                 </div>
-            </main>
+                <div className="card-gallery-wrapper">
+                    <h4>Campaigns</h4>
+                    {content.campaigns.map((el) => (
+                        <div
+                            className="card-wrapper"
+                            key={el.contentId as string}
+                        >
+                            <p>{el.contentName}</p>
+                        </div>
+                    ))}
+                </div>
+                <div className="card-gallery-wrapper">
+                    <h4>Worlds</h4>
+                    {content.worlds.map((el, i) => (
+                        <div
+                            className="card-wrapper"
+                            key={el.contentId as string}
+                        >
+                            <p>{el.contentName}</p>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }

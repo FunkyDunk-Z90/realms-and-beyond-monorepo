@@ -28,20 +28,35 @@ const rnbAccountSchema = new Schema<I_RnBAccountDocument>(
         content: {
             playerCharacters: [
                 {
-                    type: Schema.Types.ObjectId,
-                    ref: 'PlayerCharacter',
+                    contentId: {
+                        type: Schema.Types.ObjectId,
+                        ref: 'PlayerCharacter',
+                    },
+                    contentName: {
+                        type: String,
+                    },
                 },
             ],
             worlds: [
                 {
-                    type: Schema.Types.ObjectId,
-                    ref: 'World',
+                    contentId: {
+                        type: Schema.Types.ObjectId,
+                        ref: 'World',
+                    },
+                    contentName: {
+                        type: String,
+                    },
                 },
             ],
             campaigns: [
                 {
-                    type: Schema.Types.ObjectId,
-                    ref: 'Campaign',
+                    contentId: {
+                        type: Schema.Types.ObjectId,
+                        ref: 'Campaign',
+                    },
+                    contentName: {
+                        type: String,
+                    },
                 },
             ],
         },

@@ -10,23 +10,10 @@ import {
 } from 'react'
 import { useUser } from './UserContext'
 
-interface RnBAccount {
-    id: string
-    identityId: string
-    username: string
-    avatar?: string
-    content: {
-        playerCharacters: string[]
-        worlds: string[]
-        campaigns: string[]
-    }
-    subscription?: any
-    createdAt: string
-    updatedAt: string
-}
+import { I_RnBAccount } from '@rnb/types'
 
 interface RnBAccountContextType {
-    rnbAccount: RnBAccount | null
+    rnbAccount: I_RnBAccount | null
     hasRnBAccount: boolean
     isLoading: boolean
     error: string | null
@@ -79,7 +66,7 @@ async function apiCall(endpoint: string, options: RequestInit = {}) {
 
 export function RnBAccountProvider({ children }: { children: ReactNode }) {
     const { user, isAuthenticated, isLoading: userLoading } = useUser()
-    const [rnbAccount, setRnbAccount] = useState<RnBAccount | null>(null)
+    const [rnbAccount, setRnbAccount] = useState<I_RnBAccount | null>(null)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
 

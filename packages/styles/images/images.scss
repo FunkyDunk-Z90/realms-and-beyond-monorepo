@@ -1,0 +1,9 @@
+@use '../_variables' as *;
+@use '../_mixins' as *;
+
+.user-avatar {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    outline: 2px solid var(--primary-color);
+}
