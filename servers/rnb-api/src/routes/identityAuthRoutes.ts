@@ -23,8 +23,8 @@ router.post('/logout', logoutIdentity)
 router.post('/forgot-password', forgotPassword)
 router.patch('/reset-password/:token', resetPassword)
 
-router.use('/', protectIdentity)
 router.post('/is-logged-in', isLoggedIn)
+// router.use('/', protectIdentity)
 
 router.get('/my-account', getMyIdentity)
 router.patch('/update-my-account', updateMyIdentity)

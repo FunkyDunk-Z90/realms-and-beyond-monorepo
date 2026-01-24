@@ -11,6 +11,8 @@
 @use './components/layout/header';
 @use './components/layout/footer';
 
+@use './components/skeletons/skeletonStyles.scss';
+
 *,
 *::before,
 *::after {
@@ -26,6 +28,7 @@
     --bg-secondary-color: #{$light-secondary};
     --text-color: #{$dark};
     --primary-color: #{$primary};
+    --primary-hover-color: #{$primary-hover};
     --accent-color: #{$accent};
     --danger-color: #{$danger};
     --warning-color: #{$warning};
@@ -93,7 +96,11 @@ input::-webkit-inner-spin-button {
 
 .page-wrapper {
     display: grid;
-    height: 100%;
-    justify-items: center;
-    align-items: center;
+    margin-block: $xLarge;
+    margin-inline: auto;
+    // min-width: 100%;
+
+    @media (min-width: $tablet) {
+        max-width: $desktop;
+    }
 }

@@ -1,7 +1,7 @@
-export default function Loading() {
+export default function RootLoading() {
     return (
-        <div>
-            <p>...Loading</p>
+        <div className="loading-wrapper">
+            <div className="loading-spinner">Loading...</div>
         </div>
     )
 }

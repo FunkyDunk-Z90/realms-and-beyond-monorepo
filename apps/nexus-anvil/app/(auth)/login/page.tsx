@@ -1,7 +1,9 @@
-export default function Login() {
-    return (
-        <div>
-            <h1>Login</h1>
-        </div>
-    )
+'use client'
+
+import { LoginForm } from '@rnb/modularix'
+import { useUser } from '@/lib/context/UserContext'
+
+export default function LoginPage() {
+    const { login } = useUser()
+    return <LoginForm login={login} redirectLink="/dashboard" />
 }

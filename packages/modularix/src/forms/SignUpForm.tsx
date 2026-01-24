@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 import axios from 'axios'
 
@@ -207,6 +208,7 @@ export const SignUpForm = ({ signupApiUrl }: I_SignUpComponentProps) => {
                 onSubmit={handleSignUp}
                 suppressHydrationWarning
             >
+                <h1 className="form-title">Sign Up</h1>
                 {error && (
                     <div
                         className="error-message"
@@ -221,11 +223,10 @@ export const SignUpForm = ({ signupApiUrl }: I_SignUpComponentProps) => {
                         First Name
                     </label>
                     <input
-                        suppressHydrationWarning
                         className="form-input"
                         type="text"
                         id="firstName"
-                        placeholder="First Name"
+                        placeholder="Kolgart"
                         value={formData.profile.firstName}
                         onChange={handleProfileChange}
                         autoComplete="off"
@@ -235,14 +236,13 @@ export const SignUpForm = ({ signupApiUrl }: I_SignUpComponentProps) => {
                 </div>
                 <div className="form-input-container">
                     <label className="form-label" htmlFor="lastNames">
-                        Last Name(s)
+                        Last Name
                     </label>
                     <input
-                        suppressHydrationWarning
                         className="form-input"
                         type="text"
                         id="lastNames"
-                        placeholder="Last Name(s)"
+                        placeholder="Broadmaster Valenthi"
                         value={formData.profile.lastNames}
                         onChange={handleProfileChange}
                         autoComplete="off"
@@ -256,7 +256,6 @@ export const SignUpForm = ({ signupApiUrl }: I_SignUpComponentProps) => {
                     </label>
 
                     <input
-                        suppressHydrationWarning
                         className="form-input"
                         type="text"
                         id="dateOfBirth"
@@ -276,11 +275,10 @@ export const SignUpForm = ({ signupApiUrl }: I_SignUpComponentProps) => {
                         Email
                     </label>
                     <input
-                        suppressHydrationWarning
                         className="form-input"
                         type="email"
                         id="email"
-                        placeholder="youremail@mail.com"
+                        placeholder="iamnotacabbage@mail.com"
                         value={formData.contact.email}
                         onChange={handleContactChange}
                         autoComplete="off"
@@ -293,7 +291,6 @@ export const SignUpForm = ({ signupApiUrl }: I_SignUpComponentProps) => {
                         Password
                     </label>
                     <input
-                        suppressHydrationWarning
                         className={`form-input ${isPasswordValid ? 'alert' : ''}`}
                         type={showPassword ? 'text' : 'password'}
                         id="password"
@@ -326,7 +323,6 @@ export const SignUpForm = ({ signupApiUrl }: I_SignUpComponentProps) => {
                         Password Confirm
                     </label>
                     <input
-                        suppressHydrationWarning
                         className={`form-input ${isPasswordConfirmValid && 'alert'}`}
                         type={showPasswordConfirm ? 'text' : 'password'}
                         id="passwordConfirm"
@@ -358,6 +354,12 @@ export const SignUpForm = ({ signupApiUrl }: I_SignUpComponentProps) => {
                 >
                     {isLoading ? 'Signing Up...' : 'Sign Up'}
                 </Button>
+                <div className="form-link-wrapper">
+                    <p>Already have a Realms & Beyond account?</p>
+                    <Link className="form-link" href={'/login'}>
+                        Login
+                    </Link>
+                </div>
             </form>
         </div>
     )

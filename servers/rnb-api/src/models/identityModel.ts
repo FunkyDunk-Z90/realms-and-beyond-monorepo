@@ -108,9 +108,9 @@ const identitySchema = new Schema<I_IdentityDocument>(
     }
 )
 
-// Indexes
-identitySchema.index({ 'contact.email': 1 })
-identitySchema.index({ 'lifecycle.status': 1 })
+// // Indexes
+// identitySchema.index({ 'contact.email': 1 })
+// identitySchema.index({ 'lifecycle.status': 1 })
 
 // Pre-save middleware for password hashing
 identitySchema.pre('save', async function (next) {

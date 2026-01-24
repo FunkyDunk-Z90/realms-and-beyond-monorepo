@@ -3,9 +3,11 @@
 
 .form-wrapper {
     display: grid;
-    justify-items: center;
     align-items: center;
-    padding: $large;
+}
+
+.form-title {
+    font-weight: lighter;
 }
 
 .form-contents {
@@ -69,4 +71,18 @@
 
 .error-message {
     color: var(--warning-color);
+}
+
+.form-link-wrapper {
+    display: flex;
+    white-space: nowrap;
+    gap: $medium;
+}
+
+.form-link {
+    color: var(--primary-color);
+
+    &:hover {
+        color: var(--primary-hover-color);
+    }
 }
