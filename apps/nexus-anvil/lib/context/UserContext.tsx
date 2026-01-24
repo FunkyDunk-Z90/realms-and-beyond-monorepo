@@ -48,15 +48,13 @@ export function UserProvider({ children }: { children: ReactNode }) {
                 `${API_BASE_URL}/user/is-logged-in`
             )
 
-            console.log(response)
-
             if (response.data.status === 'success' && response.data.identity) {
                 setUser(response.data.identity)
             } else {
                 setUser(null)
             }
         } catch (err: any) {
-            console.error('Auth check failed:', err)
+            // console.error('Auth check failed:', err)
             setUser(null)
         } finally {
             setIsLoading(false)
@@ -76,8 +74,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
                 email,
                 password,
             })
-
-            console.log(response)
 
             if (response.data.status === 'success' && response.data.identity) {
                 setUser(response.data.identity)

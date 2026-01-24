@@ -14,6 +14,7 @@ import { I_SignUpDataProps } from '@rnb/types'
 
 interface I_SignUpComponentProps {
     signupApiUrl: string
+    formTitle: string
 }
 
 const formDataInit: I_SignUpDataProps = {
@@ -30,7 +31,10 @@ const formDataInit: I_SignUpDataProps = {
     passwordConfirm: '',
 }
 
-export const SignUpForm = ({ signupApiUrl }: I_SignUpComponentProps) => {
+export const SignUpForm = ({
+    signupApiUrl,
+    formTitle,
+}: I_SignUpComponentProps) => {
     const [showPassword, setShowPassword] = useState(false)
     const [showPasswordConfirm, setShowPasswordConfirm] = useState(false)
     const [formData, setFormData] = useState<I_SignUpDataProps>(formDataInit)
@@ -208,7 +212,7 @@ export const SignUpForm = ({ signupApiUrl }: I_SignUpComponentProps) => {
                 onSubmit={handleSignUp}
                 suppressHydrationWarning
             >
-                <h1 className="form-title">Sign Up</h1>
+                <h1 className="form-title">{formTitle}</h1>
                 {error && (
                     <div
                         className="error-message"
