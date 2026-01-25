@@ -3,7 +3,7 @@
 import { useEffect, ReactNode } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { useUser } from '../context/UserContext'
-import { useRnBAccount } from '../context/NexusAnvilContext'
+import { useRnBAccount } from '../context/AetherscribeContext'
 
 interface AuthRouterProps {
     children: ReactNode
@@ -13,16 +13,16 @@ interface AuthRouterProps {
 const PUBLIC_ROUTES = ['/signup', '/login', '/account-recovery', '/landing']
 
 // Routes that authenticated users shouldn't access
-const AUTH_ONLY_ROUTES = ['/signup', '/login', '/account-recovery']
+const AUTH_ROUTES = ['/signup', '/login', '/account-recovery']
 
 // Routes that don't require RnB account (only authentication)
 const NO_RNB_REQUIRED_ROUTES = [
     '/dashboard',
+    '/adventure-hub',
     '/create-rnb-account',
     ...PUBLIC_ROUTES,
 ]
 
-// Helper function to check if pathname matches a route
 const isRouteMatch = (pathname: string, route: string): boolean => {
     if (pathname === route) return true
     if (pathname.startsWith(route + '/')) return true
@@ -45,7 +45,7 @@ export default function AuthRouter({ children }: AuthRouterProps) {
             const isPublicRoute =
                 isRootPath ||
                 PUBLIC_ROUTES.some((route) => isRouteMatch(pathname, route))
-            const isAuthOnlyRoute = AUTH_ONLY_ROUTES.some((route) =>
+            const isAuthOnlyRoute = AUTH_ROUTES.some((route) =>
                 isRouteMatch(pathname, route)
             )
             const isNoRnBRequiredRoute = NO_RNB_REQUIRED_ROUTES.some((route) =>
@@ -69,7 +69,7 @@ export default function AuthRouter({ children }: AuthRouterProps) {
         const isPublicRoute =
             isRootPath ||
             PUBLIC_ROUTES.some((route) => isRouteMatch(pathname, route))
-        const isAuthOnlyRoute = AUTH_ONLY_ROUTES.some((route) =>
+        const isAuthOnlyRoute = AUTH_ROUTES.some((route) =>
             isRouteMatch(pathname, route)
         )
         const isNoRnBRequiredRoute = NO_RNB_REQUIRED_ROUTES.some((route) =>
@@ -81,7 +81,7 @@ export default function AuthRouter({ children }: AuthRouterProps) {
             if (!isAuthenticated) {
                 router.replace('/login')
             } else if (!hasRnBAccount) {
-                router.replace('/landing')
+                router.replace('/login')
             } else {
                 router.replace('/dashboard')
             }

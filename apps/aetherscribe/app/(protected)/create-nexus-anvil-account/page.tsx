@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useRnBAccount } from '@/lib/context/NexusAnvilContext'
+import { useRnBAccount } from '@/lib/context/AetherscribeContext'
 import { useUser } from '@/lib/context/UserContext'
 
 export default function CreateRnBAccountPage() {

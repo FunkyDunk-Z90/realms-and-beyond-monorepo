@@ -217,7 +217,7 @@ export const forgotPassword: RequestHandler = async (req, res, next) => {
 
         const resetURL = `${req.protocol}://${req.get(
             'host'
-        )}/api/v1/identity/reset-password/${resetToken}`
+        )}/api/v1/user/reset-password/${resetToken}`
 
         const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`
 
@@ -347,7 +347,10 @@ export const updatePassword: RequestHandler = async (req, res, next) => {
 // ---------- Get My Identity ----------
 export const getMyIdentity: RequestHandler = async (req, res, next) => {
     try {
-        const identity = await Identity.findById(req.user).populate('accounts')
+        const identity = await Identity.findById(req.user).populate({
+            path: 'aetherscribeAccount',
+            select: ' -identityId -__v',
+        })
 
         if (!identity) {
             return res.status(404).json({ message: 'Identity not found' })

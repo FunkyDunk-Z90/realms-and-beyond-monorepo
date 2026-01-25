@@ -11,7 +11,7 @@ export interface I_IdentityLifecycle {
 
 export interface I_IdentityProfile {
     firstName: string
-    lastNames: string
+    lastName: string
     dateOfBirth?: string
     nationality?: string
 }
@@ -24,5 +24,5 @@ export interface I_Identity {
     createdAt: T_Timestamp
     updatedAt: T_Timestamp
     lastLoginAt?: T_Timestamp
-    accounts: T_ObjectId[]
+    aetherscribeAccount: T_ObjectId
 }

@@ -1,12 +1,13 @@
 import { Schema, model, Document } from 'mongoose'
-import { I_RnBAccount } from '@rnb/types'
+import { I_AetherScribeAccountProps } from '@rnb/types'
 import { formatDate } from '../utils/formateDate'
 
-interface I_RnBAccountDocument extends Omit<I_RnBAccount, 'id'>, Document {
-    getPublicInfo(): Partial<I_RnBAccount>
+interface I_AetherScribeAccountDocument
+    extends Omit<I_AetherScribeAccountProps, 'id'>, Document {
+    getPublicInfo(): Partial<I_AetherScribeAccountProps>
 }
 
-const rnbAccountSchema = new Schema<I_RnBAccountDocument>(
+const aetherscribeSchema = new Schema<I_AetherScribeAccountDocument>(
     {
         identityId: {
             type: Schema.Types.ObjectId,
@@ -53,6 +54,83 @@ const rnbAccountSchema = new Schema<I_RnBAccountDocument>(
                     contentId: {
                         type: Schema.Types.ObjectId,
                         ref: 'Campaign',
+                    },
+                    contentName: {
+                        type: String,
+                    },
+                },
+            ],
+            items: [
+                {
+                    contentId: {
+                        type: Schema.Types.ObjectId,
+                        ref: 'Item',
+                    },
+                    contentName: {
+                        type: String,
+                    },
+                },
+            ],
+            classes: [
+                {
+                    contentId: {
+                        type: Schema.Types.ObjectId,
+                        ref: 'TtrpgClass',
+                    },
+                    contentName: {
+                        type: String,
+                    },
+                },
+            ],
+            ancestries: [
+                {
+                    contentId: {
+                        type: Schema.Types.ObjectId,
+                        ref: 'Ancestry',
+                    },
+                    contentName: {
+                        type: String,
+                    },
+                },
+            ],
+            monsters: [
+                {
+                    contentId: {
+                        type: Schema.Types.ObjectId,
+                        ref: 'Monster',
+                    },
+                    contentName: {
+                        type: String,
+                    },
+                },
+            ],
+            spells: [
+                {
+                    contentId: {
+                        type: Schema.Types.ObjectId,
+                        ref: 'Spell',
+                    },
+                    contentName: {
+                        type: String,
+                    },
+                },
+            ],
+            feats: [
+                {
+                    contentId: {
+                        type: Schema.Types.ObjectId,
+                        ref: 'Feat',
+                    },
+                    contentName: {
+                        type: String,
+                    },
+                },
+            ],
+            backgrounds: [
+                {
+                    contentId: {
+                        type: Schema.Types.ObjectId,
+                        ref: 'Background',
                     },
                     contentName: {
                         type: String,
@@ -128,30 +206,31 @@ const rnbAccountSchema = new Schema<I_RnBAccountDocument>(
     }
 )
 
-// Indexes
-// rnbAccountSchema.index({ identityId: 1 })
-// rnbAccountSchema.index({ userName: 1 })
-
 // Instance methods
-rnbAccountSchema.methods.getPublicInfo = function (): Partial<I_RnBAccount> {
-    return {
-        identityId: this.identityId,
-        username: this.username,
-        avatar: this.avatar,
-        content: this.content,
-        subscription: this.subscription
-            ? {
-                  ...this.subscription.toObject(),
-                  startedOn: formatDate(this.subscription.startedOn),
-                  expiresOn: formatDate(this.subscription.expiresOn),
-                  renewsOn: formatDate(this.subscription.renewsOn),
-              }
-            : null,
-        createdAt: formatDate(this.createdAt),
-        updatedAt: formatDate(this.updatedAt),
+aetherscribeSchema.methods.getPublicInfo =
+    function (): Partial<I_AetherScribeAccountProps> {
+        return {
+            id: this._id,
+            identityId: this.identityId,
+            username: this.username,
+            avatar: this.avatar,
+            content: this.content,
+            subscription: this.subscription
+                ? {
+                      ...this.subscription.toObject(),
+                      startedOn: formatDate(this.subscription.startedOn),
+                      expiresOn: formatDate(this.subscription.expiresOn),
+                      renewsOn: formatDate(this.subscription.renewsOn),
+                  }
+                : null,
+            createdAt: formatDate(this.createdAt),
+            updatedAt: formatDate(this.updatedAt),
+        }
     }
-}
 
-const RnBAccount = model<I_RnBAccountDocument>('RnBAccount', rnbAccountSchema)
+const AetherscribeAccount = model<I_AetherScribeAccountDocument>(
+    'AetherscribeAccount',
+    aetherscribeSchema
+)
 
-export default RnBAccount
+export default AetherscribeAccount

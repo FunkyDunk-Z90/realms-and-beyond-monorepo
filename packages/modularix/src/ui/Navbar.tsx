@@ -7,8 +7,7 @@ import { usePathname } from 'next/navigation'
 import { I_NavBarProps } from '@rnb/types'
 
 export const Navbar = ({ items }: I_NavBarProps) => {
-    const mobile = window.innerWidth < 768
-    const [isMobile, setIsMobile] = useState(mobile)
+    const [isMobile, setIsMobile] = useState(false)
     const [isActive, setIsActive] = useState(false)
     const [openStatus, setOpenStatus] = useState('')
     const navbarRef = useRef<HTMLDivElement>(null)
@@ -18,6 +17,17 @@ export const Navbar = ({ items }: I_NavBarProps) => {
     const itemCount = items.length
     const linkRefs = useRef<(HTMLAnchorElement | null)[]>([])
     const [underlineWidth, setUnderlineWidth] = useState(0)
+
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768)
+        }
+
+        checkMobile() // run once on mount
+        window.addEventListener('resize', checkMobile)
+
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
 
     useEffect(() => {
         function handleResize() {

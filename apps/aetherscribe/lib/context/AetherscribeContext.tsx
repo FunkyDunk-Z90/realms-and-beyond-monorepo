@@ -10,10 +10,10 @@ import {
 } from 'react'
 import { useUser } from './UserContext'
 
-import { I_RnBAccount } from '@rnb/types'
+import { I_AetherScribeAccountProps } from '@rnb/types'
 
 interface RnBAccountContextType {
-    rnbAccount: I_RnBAccount | null
+    rnbAccount: I_AetherScribeAccountProps | null
     hasRnBAccount: boolean
     isLoading: boolean
     error: string | null
@@ -66,7 +66,8 @@ async function apiCall(endpoint: string, options: RequestInit = {}) {
 
 export function RnBAccountProvider({ children }: { children: ReactNode }) {
     const { user, isAuthenticated, isLoading: userLoading } = useUser()
-    const [rnbAccount, setRnbAccount] = useState<I_RnBAccount | null>(null)
+    const [rnbAccount, setRnbAccount] =
+        useState<I_AetherScribeAccountProps | null>(null)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
 

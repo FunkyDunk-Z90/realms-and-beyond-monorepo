@@ -42,7 +42,7 @@ const identitySchema = new Schema<I_IdentityDocument>(
                 required: [true, 'First name is required'],
                 trim: true,
             },
-            lastNames: {
+            lastName: {
                 type: String,
                 required: [true, 'Last names are required'],
                 trim: true,
@@ -88,12 +88,10 @@ const identitySchema = new Schema<I_IdentityDocument>(
         lastLoginAt: {
             type: Date,
         },
-        accounts: [
-            {
-                type: Schema.Types.ObjectId,
-                refPath: 'accountModel',
-            },
-        ],
+        aetherscribeAccount: {
+            type: Schema.Types.ObjectId,
+            ref: 'AetherscribeAccount',
+        },
         passwordChangedAt: Date,
         passwordResetToken: String,
         passwordResetExpiresIn: Date,
@@ -162,9 +160,9 @@ identitySchema.methods.getPublicInfo = function (): Partial<I_Identity> {
             phoneNumber: this.contact.phoneNumber,
             address: this.contact.address,
         },
+        aetherscribeAccount: this.aetherscribeAccount,
         lifecycle: this.lifecycle,
         lastLoginAt: formatDate(this.lastLoginAt),
-        accounts: this.accounts,
         createdAt: formatDate(this.createdAt),
         updatedAt: formatDate(this.updatedAt),
     }

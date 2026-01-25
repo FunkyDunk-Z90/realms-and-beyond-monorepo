@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
 import { useUser } from '@/lib/context/UserContext'
-import { useRnBAccount } from '@/lib/context/NexusAnvilContext'
+import { useRnBAccount } from '@/lib/context/AetherscribeContext'
 import { I_RnBAccount } from '@rnb/types'
 
 import { Button } from '@rnb/modularix'

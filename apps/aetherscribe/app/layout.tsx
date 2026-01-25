@@ -2,16 +2,19 @@ import type { ReactNode } from 'react'
 import { Header, Footer, Navbar } from '@rnb/modularix'
 import { UserProvider } from '../lib/context/UserContext'
 import AuthRouter from '@/lib/features/AuthRouter'
-import { RnBAccountProvider } from '@/lib/context/NexusAnvilContext'
+import { RnBAccountProvider } from '@/lib/context/AetherscribeContext'
 
 import '@rnb/styles'
 
-import Logo from '../assets/dragon.jpg'
+import Logo from '../assets/aetherscribe-logo.jpg'
 import { I_NavBarProps } from '@rnb/types'
 
 export const metadata = {
-    title: 'Nexus Anvil',
+    title: 'Aetherscribe',
     description: 'A TTRPG content creation/sharing site',
+    icons: {
+        icon: '/favicon.ico',
+    },
 }
 
 const navbarData: I_NavBarProps = {
@@ -42,22 +45,23 @@ const navbarData: I_NavBarProps = {
 export default function RootLayout({ children }: { children: ReactNode }) {
     return (
         <html lang="en">
+            <head>
+                <link rel="icon" href="/favicon.ico" sizes="any" />
+            </head>
             <body className="app-wrapper">
                 <UserProvider>
                     <RnBAccountProvider>
                         <Header
-                            companyName="Nexus Anvil"
+                            companyName="Aetherscribe"
                             companyLogo={Logo}
                             rootLink="dashboard"
                             navbarData={navbarData}
                         />
                         <section className="page-wrapper">
-                            {/* <AuthRouter> */}
-                            {children}
-                            {/* </AuthRouter> */}
+                            <AuthRouter>{children}</AuthRouter>
                         </section>
                         <Footer
-                            companyName={'Nexus Anvil'}
+                            companyName={'Aetherscribe'}
                             copyright="@copyright RealmsAndBeyond ltd. 2026"
                         />
                     </RnBAccountProvider>
