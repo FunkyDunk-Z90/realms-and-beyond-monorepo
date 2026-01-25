@@ -1,7 +1,9 @@
 import { Types } from 'mongoose'
+import { StaticImageData } from 'next/image'
 
 export type T_ObjectId = Types.ObjectId | string
 export type T_Timestamp = Date | string
+export type T_ImageType = StaticImageData | string
 
 export type T_Sizes = 'tiny' | 'small' | 'medium' | 'large' | 'x-large'
 

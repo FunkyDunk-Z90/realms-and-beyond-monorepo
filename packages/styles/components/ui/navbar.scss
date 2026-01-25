@@ -1,0 +1,151 @@
+@use '../../_variables' as *;
+@use '../../_mixins' as *;
+
+.navbar-wrapper {
+    position: relative;
+    padding: $medium;
+    width: 100%;
+    z-index: 10;
+}
+
+.nav-wrapper {
+    position: relative;
+    display: grid;
+    grid-template-columns: $gallery-100px;
+    max-width: $tablet;
+}
+
+.link-wrapper {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.nav-link {
+    position: relative;
+    white-space: nowrap;
+    padding-block: $small;
+    text-align: center;
+    font-size: 1.2rem;
+
+    &.active {
+        color: var(--primary-color);
+    }
+}
+
+.nav-link-underline {
+    position: absolute;
+    bottom: 0;
+
+    height: 2px;
+    width: 90px;
+    background-color: var(--text-color);
+    border-radius: $border-radius;
+
+    transition:
+        left 0.5s ease,
+        width 0.5s ease;
+}
+
+.navbar-btn-wrapper {
+    position: absolute;
+    top: $large;
+    left: 100%;
+    z-index: 20;
+}
+
+@media (max-width: $tablet) {
+    .navbar-wrapper {
+        position: absolute;
+        top: 100%;
+        left: -50%;
+        background-color: var(--bg-secondary-color);
+        width: 50%;
+    }
+
+    .nav-wrapper {
+        grid-template-columns: auto;
+        gap: $large;
+        padding: $medium;
+    }
+
+    .nav-link {
+        padding: 0;
+    }
+
+    .nav-link-underline {
+        display: none;
+    }
+}
+
+.navbar-wrapper.opened {
+    animation: slide-in 0.5s forwards;
+}
+
+.navbar-wrapper.closed {
+    animation: slide-out 0.5s forwards;
+}
+
+@keyframes slide-in {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes slide-out {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.burgerIcon {
+    position: absolute;
+    width: 30px;
+    height: 20px;
+    background-color: var(--bg-secondary-color);
+    border-radius: 50%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    top: 50%;
+    transform: translateY(-50%);
+    left: $medium;
+
+    @media (min-width: $tablet) {
+        display: none;
+    }
+
+    .line {
+        width: 100%;
+        height: 2px;
+        border-radius: 16px;
+
+        background-color: var(--text-color);
+        transition:
+            transform 0.4s ease,
+            opacity 0.4s ease;
+        transform-origin: left center;
+    }
+
+    &.active {
+        .line:nth-child(1) {
+            transform: translateY(-2px) rotate(45deg);
+        }
+
+        .line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .line:nth-child(3) {
+            transform: translateY(2px) rotate(-45deg);
+        }
+    }
+}

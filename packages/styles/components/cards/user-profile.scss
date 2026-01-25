@@ -1,0 +1,25 @@
+@use '../../_variables' as *;
+@use '../../_mixins' as *;
+
+.card-gallery-wrapper {
+    display: grid;
+    background-color: var(--bg-color);
+    border-radius: $border-radius;
+    margin: $medium;
+    padding: $large;
+    gap: $large;
+}
+
+.card-wrapper {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    background-color: var(--bg-primary-color);
+    cursor: pointer;
+    border-radius: $border-radius;
+    min-height: 40px;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}

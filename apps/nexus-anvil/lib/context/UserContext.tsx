@@ -11,7 +11,7 @@ import {
 import axios from 'axios'
 import { I_Identity, I_SignUpDataProps } from '@rnb/types'
 
-interface UserContextType {
+interface I_UserContextProps {
     user: I_Identity | null
     isLoading: boolean
     isAuthenticated: boolean
@@ -24,15 +24,44 @@ interface UserContextType {
     clearError: () => void
 }
 
-const UserContext = createContext<UserContextType | undefined>(undefined)
+const UserContext = createContext<I_UserContextProps | undefined>(undefined)
 
 const API_BASE_URL = 'http://localhost:5674/api/v1'
 
 // Configure axios to include credentials (cookies)
 axios.defaults.withCredentials = true
 
+const offlineUser: I_Identity = {
+    id: '0001',
+    profile: {
+        firstName: 'Duncan William',
+        lastNames: 'Saul',
+        dateOfBirth: '08/11/1990',
+        nationality: 'British',
+    },
+    contact: {
+        address: {
+            addressLine1: 'Heidekamp 21',
+            city: 'Buchholz in der Nordheide',
+            country: 'Germany',
+            postcode: '21244',
+        },
+        email: 'saul.dw90@gmail.com',
+        phoneNumber: {
+            countryCode: '+49',
+            phoneNumber: '1736548484',
+        },
+    },
+    accounts: ['0015674'],
+    createdAt: '01/01/2026',
+    lifecycle: {
+        status: 'active',
+    },
+    updatedAt: '01/01/2026',
+}
+
 export function UserProvider({ children }: { children: ReactNode }) {
-    const [user, setUser] = useState<I_Identity | null>(null)
+    const [user, setUser] = useState<I_Identity | null>(offlineUser)
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
@@ -44,19 +73,23 @@ export function UserProvider({ children }: { children: ReactNode }) {
     const checkAuthStatus = useCallback(async () => {
         try {
             setIsLoading(true)
-            const response = await axios.get(
-                `${API_BASE_URL}/user/is-logged-in`
-            )
 
-            console.log(response)
+            if (!offlineUser) {
+                const response = await axios.get(
+                    `${API_BASE_URL}/user/is-logged-in`
+                )
 
-            if (response.data.status === 'success' && response.data.identity) {
-                setUser(response.data.identity)
-            } else {
-                setUser(null)
+                if (
+                    response.data.status === 'success' &&
+                    response.data.identity
+                ) {
+                    setUser(response.data.identity)
+                } else {
+                    setUser(null)
+                }
             }
         } catch (err: any) {
-            console.error('Auth check failed:', err)
+            // console.error('Auth check failed:', err)
             setUser(null)
         } finally {
             setIsLoading(false)
@@ -76,8 +109,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
                 email,
                 password,
             })
-
-            console.log(response)
 
             if (response.data.status === 'success' && response.data.identity) {
                 setUser(response.data.identity)
@@ -155,7 +186,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         await checkAuthStatus()
     }
 
-    const value: UserContextType = {
+    const value: I_UserContextProps = {
         user,
         isLoading,
         isAuthenticated: !!user,

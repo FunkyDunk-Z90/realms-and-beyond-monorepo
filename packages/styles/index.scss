@@ -3,15 +3,20 @@
 
 @use './components/sidebar';
 @use './components/dropdown';
-@use './components/navbar';
 @use './components/button';
+
+@use './components/ui/navbar';
+
+@use './images/images';
 
 @use './components/forms/form';
 
 @use './components/layout/header';
 @use './components/layout/footer';
 
-@use './components/skeletons/skeletonStyles.scss';
+@use './components/cards/user-profile';
+
+@use './components/skeletons/skeletonStyles';
 
 *,
 *::before,
@@ -26,6 +31,7 @@
 :root {
     --bg-color: #{$light};
     --bg-secondary-color: #{$light-secondary};
+    --bg-primary-color: #{$primary-light};
     --text-color: #{$dark};
     --primary-color: #{$primary};
     --primary-hover-color: #{$primary-hover};
@@ -47,6 +53,7 @@
         --bg-color: #{$dark};
         --bg-secondary-color: #{$dark-secondary};
         --text-color: #{$light};
+        --text-secondary-color: #{$light-secondary};
         --border-color: #{$border-dark};
     }
 }
@@ -73,7 +80,7 @@ a {
     width: max-content;
 
     &:hover {
-        color: var(--primary-color);
+        color: var(--primary-hover-color);
     }
 }
 
@@ -103,4 +110,27 @@ input::-webkit-inner-spin-button {
     @media (min-width: $tablet) {
         max-width: $desktop;
     }
+}
+
+.section-wrapper {
+    display: grid;
+    background-color: var(--bg-secondary-color);
+    border-radius: $border-radius;
+    padding: $large;
+}
+
+.dashboard-wrapper {
+    display: grid;
+    gap: $large;
+}
+
+.adventure-hub-wrapper {
+    display: grid;
+    background-color: var(--bg-secondary-color);
+    border-radius: $border-radius;
+    padding: $medium;
+}
+
+.section-title {
+    margin: $medium;
 }

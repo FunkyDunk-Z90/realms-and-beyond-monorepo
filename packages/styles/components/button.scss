@@ -13,10 +13,9 @@
     min-width: 80px;
     border: none;
     border-radius: $border-radius;
-    opacity: 0.8;
 
     &:hover {
-        opacity: 1;
+        background-color: var(--primary-hover-color);
     }
 
     &:active {

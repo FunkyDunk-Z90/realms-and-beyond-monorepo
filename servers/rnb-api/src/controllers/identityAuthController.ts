@@ -180,7 +180,6 @@ export const protectIdentity: RequestHandler = async (req, res, next) => {
 export const isLoggedIn: RequestHandler = async (req, res, next) => {
     try {
         const identity = await Identity.findById(req.user).populate('accounts')
-        console.log(identity)
 
         if (!identity) {
             return res.status(400).json({ message: 'Please login again' })

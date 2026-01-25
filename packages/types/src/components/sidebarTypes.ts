@@ -1,6 +1,6 @@
 import type { JSX, FC, SVGProps } from 'react'
 import type { T_ImageSource } from '../nextTypes'
-import type { I_NavLink } from '../navigationTypes'
+import type { I_Link } from '../navigationTypes'
 import type { I_DropdownOption } from './dropdownTypes'
 
 // --------------------------------------
@@ -19,7 +19,7 @@ interface I_SidebarItemBase {
 /** Single clickable item (no dropdown) */
 export interface I_SidebarLinkItem extends I_SidebarItemBase {
     kind: 'link'
-    link: I_NavLink
+    link: I_Link
 }
 
 /** Dropdown item that uses the ACTUAL dropdown option types */
