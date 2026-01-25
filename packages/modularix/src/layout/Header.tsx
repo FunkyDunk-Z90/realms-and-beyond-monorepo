@@ -2,24 +2,29 @@
 
 import Image, { StaticImageData } from 'next/image'
 import { useRouter } from 'next/navigation'
+import { Navbar } from '../ui/Navbar'
+import { I_NavBarProps } from '@rnb/types'
 
 interface I_HeaderProps {
     companyBanner?: StaticImageData
     companyLogo?: StaticImageData
     companyName: string
-    navigationLink?: string
+    rootLink?: string
+    navbarData: I_NavBarProps
 }
 
 export const Header = ({
     companyLogo,
     companyBanner,
     companyName,
-    navigationLink,
+    rootLink,
+    navbarData,
 }: I_HeaderProps) => {
     const router = useRouter()
+    const { items } = navbarData
 
     const handleNavigate = () => {
-        router.push(`/${navigationLink}`)
+        router.push(`/${rootLink}`)
     }
 
     return (
@@ -49,6 +54,7 @@ export const Header = ({
                         {companyName}
                     </h1>
                 </div>
+                <Navbar items={items} />
             </div>
         </div>
     )

@@ -3,19 +3,20 @@
 
 @use './components/sidebar';
 @use './components/dropdown';
-@use './components/navbar';
 @use './components/button';
 
-@use './images/images.scss';
+@use './components/ui/navbar';
+
+@use './images/images';
 
 @use './components/forms/form';
 
 @use './components/layout/header';
 @use './components/layout/footer';
 
-@use './components/cards/user-profile.scss';
+@use './components/cards/user-profile';
 
-@use './components/skeletons/skeletonStyles.scss';
+@use './components/skeletons/skeletonStyles';
 
 *,
 *::before,
@@ -79,7 +80,7 @@ a {
     width: max-content;
 
     &:hover {
-        color: var(--primary-color);
+        color: var(--primary-hover-color);
     }
 }
 

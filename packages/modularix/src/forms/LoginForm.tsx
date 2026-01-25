@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Button } from '../Button'
+import { Button } from '../ui/Button'
 
 interface I_LoginProps {
     redirectLink: string

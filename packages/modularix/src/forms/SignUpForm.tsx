@@ -8,7 +8,7 @@ import axios from 'axios'
 import EyeClosed from '../../assets/icons/eyeClosed.svg'
 import EyeOpen from '../../assets/icons/eyeOpen.svg'
 
-import { Button } from '../Button'
+import { Button } from '../ui/Button'
 
 import { I_SignUpDataProps } from '@rnb/types'
 
