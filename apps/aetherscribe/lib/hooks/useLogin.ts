@@ -1,24 +1,21 @@
 'use client'
 
 import axios from 'axios'
-import { I_Identity } from '@rnb/types'
+import { I_Identity, I_LoginEmailType } from '@rnb/types'
 import { env } from '../utils/validateEnv'
 
 interface IProps {
     setUser: React.Dispatch<React.SetStateAction<I_Identity | null>>
     setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
     setError: React.Dispatch<React.SetStateAction<string | null>>
-    email: string
-    password: string
 }
 
 export function useLoginFunction({ setUser, setIsLoading, setError }: IProps) {
-    return async (email: string, password: string) => {
+    return async (formData: I_LoginEmailType) => {
         try {
             setIsLoading(true)
             setError(null)
-
-            console.log(email, password)
+            const { email, password } = formData
 
             const response = await axios.post(
                 'http://localhost:5674/api/v1/user/login',

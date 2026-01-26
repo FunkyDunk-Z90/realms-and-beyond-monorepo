@@ -4,6 +4,11 @@
 .form-wrapper {
     display: grid;
     align-items: center;
+    background-color: var(--bg-secondary-color);
+    padding: $large;
+    gap: $large;
+    border-radius: $border-radius;
+    height: min-content;
 }
 
 .form-title {
@@ -16,16 +21,15 @@
     display: grid;
     justify-items: center;
     align-items: center;
-    gap: $large;
-    padding: $large;
+
     max-width: min-content;
-    background-color: var(--bg-secondary-color);
     text-align: start;
+    gap: $medium;
 
     @include border;
 }
 
-.form-input-container {
+.form-input-wrapper {
     position: relative;
     display: grid;
     padding: $small;

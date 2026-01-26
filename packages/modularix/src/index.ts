@@ -7,6 +7,7 @@ export * from './ui/Navbar'
 
 export * from './forms/SignUpForm'
 export * from './forms/LoginForm'
+export * from './forms/Form'
 
 export * from './layout/Header'
 export * from './layout/Footer'

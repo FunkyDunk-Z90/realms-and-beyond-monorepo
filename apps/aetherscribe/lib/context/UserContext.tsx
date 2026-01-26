@@ -1,7 +1,7 @@
 'use client'
 
 import { createContext, useContext, useState, ReactNode } from 'react'
-import { I_Identity, I_SignUpDataProps } from '@rnb/types'
+import { I_Identity, I_AetherscribeSignup, I_LoginEmailType } from '@rnb/types'
 import { env } from '../utils/validateEnv'
 
 import { useCheckAuthStatus } from '../hooks/useAuthStatus'
@@ -15,9 +15,9 @@ interface I_UserContextProps {
     user: I_Identity | null
     isLoading: boolean
     isAuthenticated: boolean
-    login: (email: string, password: string) => Promise<void>
+    login: (formData: I_LoginEmailType) => Promise<void>
     logout: () => Promise<void>
-    signUp: (signUpData: I_SignUpDataProps) => Promise<void>
+    signUp: (signUpData: I_AetherscribeSignup) => Promise<void>
     updateUser: (updateData: Partial<I_Identity>) => Promise<void>
     refreshUser: () => Promise<void>
     error: string | null

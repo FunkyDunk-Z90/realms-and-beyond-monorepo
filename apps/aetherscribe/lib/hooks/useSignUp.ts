@@ -1,7 +1,7 @@
 'use client'
 
 import axios from 'axios'
-import { I_SignUpDataProps, I_Identity } from '@rnb/types'
+import { I_AetherscribeSignup, I_Identity } from '@rnb/types'
 
 interface IProps {
     setUser: React.Dispatch<React.SetStateAction<I_Identity | null>>
@@ -10,7 +10,7 @@ interface IProps {
 }
 
 export function useSignUpFunction({ setUser, setIsLoading, setError }: IProps) {
-    return async (signUpData: I_SignUpDataProps) => {
+    return async (signUpData: I_AetherscribeSignup) => {
         try {
             setIsLoading(true)
             setError(null)
