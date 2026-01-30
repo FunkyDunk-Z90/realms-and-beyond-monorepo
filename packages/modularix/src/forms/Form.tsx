@@ -51,12 +51,12 @@ export const Form = <T,>({
 
     return (
         <div className="form-wrapper">
-            <h1 className="form-title">{formTitle}</h1>
             <form
                 className="form-contents"
                 onSubmit={handleSubmit}
                 suppressHydrationWarning
             >
+                <h1 className="form-title">{formTitle}</h1>
                 {fields.map((field) => (
                     <div key={field.id} className="form-input-wrapper">
                         <label className="form-label" htmlFor={field.id}>

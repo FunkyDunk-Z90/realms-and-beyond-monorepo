@@ -4,11 +4,7 @@
 .form-wrapper {
     display: grid;
     align-items: center;
-    background-color: var(--bg-secondary-color);
-    padding: $large;
-    gap: $large;
-    border-radius: $border-radius;
-    height: min-content;
+    justify-items: center;
 }
 
 .form-title {
@@ -24,9 +20,11 @@
 
     max-width: min-content;
     text-align: start;
-    gap: $medium;
 
-    @include border;
+    background-color: var(--bg-secondary-color);
+    padding: $large;
+    gap: $large;
+    border-radius: $border-radius;
 }
 
 .form-input-wrapper {
