@@ -1,3 +1,5 @@
+import { T_RenewelCycle, T_SubscriptionTier } from '../users/subscriptionTypes'
+
 export interface I_AetherscribeSignup {
     firstName: string
     lastName: string
@@ -7,4 +9,6 @@ export interface I_AetherscribeSignup {
     username: string
     password: string
     passwordConfirm: string
+    renewelCycle: T_RenewelCycle
+    subscriptionTier: T_SubscriptionTier
 }

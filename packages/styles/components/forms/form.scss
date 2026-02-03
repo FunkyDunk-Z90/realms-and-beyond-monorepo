@@ -9,7 +9,7 @@
 
 .form-title {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     font-weight: lighter;
 }
 
@@ -18,13 +18,14 @@
     justify-items: center;
     align-items: center;
 
-    max-width: min-content;
+    max-width: $tablet;
     text-align: start;
 
     background-color: var(--bg-secondary-color);
     padding: $large;
     gap: $large;
-    border-radius: $border-radius;
+
+    @include border;
 }
 
 .form-input-wrapper {

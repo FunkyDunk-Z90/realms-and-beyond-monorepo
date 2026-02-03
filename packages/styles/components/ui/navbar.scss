@@ -1,18 +1,19 @@
 @use '../../_variables' as *;
 @use '../../_mixins' as *;
 
-.navbar-wrapper {
-    position: relative;
+.nav-wrapper {
     padding: $medium;
-    width: 100%;
-    z-index: 10;
+    z-index: 1000;
+    margin-top: $small;
+
+    @include border;
 }
 
-.nav-wrapper {
+.nav-menu-wrapper {
     position: relative;
     display: grid;
     grid-template-columns: $gallery-100px;
-    max-width: $tablet;
+    justify-items: center;
 }
 
 .link-wrapper {
@@ -45,27 +46,32 @@
     transition:
         left 0.5s ease,
         width 0.5s ease;
+
+    &.hidden {
+        display: none;
+    }
 }
 
 .navbar-btn-wrapper {
     position: absolute;
     top: $large;
-    left: 100%;
+    right: 100%;
     z-index: 20;
 }
 
-@media (max-width: $tablet) {
-    .navbar-wrapper {
+@media (max-width: $desktop) {
+    .nav-wrapper {
         position: absolute;
         top: 100%;
-        left: -50%;
+        right: 0;
         background-color: var(--bg-secondary-color);
         width: 50%;
+        transform: translateX(100%);
     }
 
-    .nav-wrapper {
+    .nav-menu-wrapper {
         grid-template-columns: auto;
-        gap: $large;
+        gap: $xLarge;
         padding: $medium;
     }
 
@@ -78,29 +84,29 @@
     }
 }
 
-.navbar-wrapper.opened {
+.nav-wrapper.opened {
     animation: slide-in 0.5s forwards;
 }
 
-.navbar-wrapper.closed {
+.nav-wrapper.closed {
     animation: slide-out 0.5s forwards;
 }
 
 @keyframes slide-in {
     0% {
-        transform: translateX(0%);
+        transform: translateX(100%);
     }
     100% {
-        transform: translateX(100%);
+        transform: translateX(-1%);
     }
 }
 
 @keyframes slide-out {
     0% {
-        transform: translateX(100%);
+        transform: translateX(0%);
     }
     100% {
-        transform: translateX(0%);
+        transform: translateX(100%);
     }
 }
 
@@ -117,9 +123,9 @@
     cursor: pointer;
     top: 50%;
     transform: translateY(-50%);
-    left: $medium;
+    right: $large;
 
-    @media (min-width: $tablet) {
+    @media (min-width: $desktop) {
         display: none;
     }
 
@@ -130,14 +136,14 @@
 
         background-color: var(--text-color);
         transition:
-            transform 0.4s ease,
-            opacity 0.4s ease;
+            transform 0.5s ease,
+            opacity 0.3s ease;
         transform-origin: left center;
     }
 
     &.active {
         .line:nth-child(1) {
-            transform: translateY(-2px) rotate(45deg);
+            transform: translateY(20px) translateX(5px) rotate(-45deg);
         }
 
         .line:nth-child(2) {
@@ -145,7 +151,7 @@
         }
 
         .line:nth-child(3) {
-            transform: translateY(2px) rotate(-45deg);
+            transform: translateY(-19px) translateX(5px) rotate(45deg);
         }
     }
 }

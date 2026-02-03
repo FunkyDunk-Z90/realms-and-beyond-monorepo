@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Button } from '../ui/Button'
-import { I_Link } from '@rnb/types'
+import { I_DropdownOption, I_Link } from '@rnb/types'
 
 interface I_FieldConfig<T> {
     fieldName: keyof T
