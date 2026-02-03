@@ -95,7 +95,6 @@ export const Header = ({
                 accumulatedDelta.current = 0
             }
 
-            // ── snapshot ──────────────────────────────────────────────
             lastScrollY.current = currentY
             lastTimestamp.current = now
         }

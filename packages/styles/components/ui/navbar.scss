@@ -5,8 +5,6 @@
     padding: $medium;
     z-index: 1000;
     margin-top: $small;
-
-    @include border;
 }
 
 .nav-menu-wrapper {
@@ -67,6 +65,8 @@
         background-color: var(--bg-secondary-color);
         width: 50%;
         transform: translateX(100%);
+
+        @include border;
     }
 
     .nav-menu-wrapper {
