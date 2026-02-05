@@ -8,9 +8,10 @@ import { Button } from '../ui/Button'
 interface I_LoginProps {
     redirectLink: string
     login: (email: string, password: string) => Promise<void>
+    error?: string
 }
 
-export const LoginForm = ({ redirectLink, login }: I_LoginProps) => {
+export const LoginForm = ({ redirectLink, login, error }: I_LoginProps) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const router = useRouter()
@@ -55,6 +56,7 @@ export const LoginForm = ({ redirectLink, login }: I_LoginProps) => {
                     autoCorrect="off"
                     required
                 />
+                {error && <p className="error">{error}</p>}
                 <Button btnType="submit" children={'Login'} />
                 <div className="form-link-wrapper">
                     <p>Don't have a Realms & Beyond account?</p>

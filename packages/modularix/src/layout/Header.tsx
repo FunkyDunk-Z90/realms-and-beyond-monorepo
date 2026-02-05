@@ -12,6 +12,7 @@ export const Header = ({
     companyName,
     rootLink,
     navbarItems,
+    hasAuth,
 }: I_HeaderProps) => {
     const router = useRouter()
     const headerHeight = 80
@@ -139,7 +140,12 @@ export const Header = ({
                             {companyName}
                         </h1>
                     </div>
-                    <Navbar items={navbarItems} scrollLock={setScrollLock} />
+                    {hasAuth && (
+                        <Navbar
+                            items={navbarItems}
+                            scrollLock={setScrollLock}
+                        />
+                    )}
                 </div>
             </div>
         </>

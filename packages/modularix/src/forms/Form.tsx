@@ -21,6 +21,7 @@ interface I_FormProps<T> {
     link?: I_Link
     linkText?: string
     formTitle: string
+    errorMessage?: string | null
 }
 
 export const Form = <T,>({
@@ -31,6 +32,7 @@ export const Form = <T,>({
     link,
     linkText,
     formTitle,
+    errorMessage,
 }: I_FormProps<T>) => {
     const [values, setValues] = useState<T>(initialValue)
 
@@ -74,6 +76,7 @@ export const Form = <T,>({
                         />
                     </div>
                 ))}
+                {errorMessage && <p className="error">{errorMessage}</p>}
                 <Button children={buttonText} btnType="submit" />
                 {link && (
                     <div className="form-link-wrapper">

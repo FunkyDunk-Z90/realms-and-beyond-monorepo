@@ -3,6 +3,7 @@
 import { Form } from '@rnb/modularix'
 import { useUser } from '@/lib/context/UserContext'
 import { I_LoginEmailType } from '@rnb/types'
+import { Button } from '@rnb/modularix'
 
 const loginInit: I_LoginEmailType = {
     email: '',
@@ -10,7 +11,7 @@ const loginInit: I_LoginEmailType = {
 }
 
 export default function LoginPage() {
-    const { login } = useUser()
+    const { login, error } = useUser()
 
     return (
         <Form<I_LoginEmailType>
@@ -40,6 +41,7 @@ export default function LoginPage() {
             }}
             linkText={`Don't have an account?`}
             formTitle="Login"
+            errorMessage={error}
         />
     )
 }

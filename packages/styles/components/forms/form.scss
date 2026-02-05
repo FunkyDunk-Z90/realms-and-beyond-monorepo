@@ -11,6 +11,11 @@
     display: flex;
     justify-content: space-between;
     font-weight: lighter;
+
+    &.skeleton {
+        height: 40px;
+        width: 200px;
+    }
 }
 
 .form-contents {
@@ -91,3 +96,5 @@
         color: var(--primary-hover-color);
     }
 }
+
+// Form Skeletons

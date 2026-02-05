@@ -139,3 +139,41 @@ input::-webkit-inner-spin-button {
 .section-title {
     margin: $medium;
 }
+
+.error {
+    color: var(--danger-color);
+    font-size: 1.2rem;
+    font-weight: bolder;
+    // background-color: var(--bg-color);
+    // border-radius: $border-radius;
+    // padding: $small $medium;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    border-radius: $border-radius;
+}
+
+.skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--text-color),
+        transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 4s ease-in-out infinite;
+}

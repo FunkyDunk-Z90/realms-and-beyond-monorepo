@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useState, ReactNode } from 'react'
 import { I_Identity, I_AetherscribeSignup, I_LoginEmailType } from '@rnb/types'
-import { env } from '../utils/validateEnv'
 
 import { useCheckAuthStatus } from '../hooks/useAuthStatus'
 import { useLoginFunction } from '../hooks/useLogin'
@@ -14,7 +13,6 @@ import { useRefreshUserFunction } from '../hooks/useRefreshUser'
 interface I_UserContextProps {
     user: I_Identity | null
     isLoading: boolean
-    isAuthenticated: boolean
     login: (formData: I_LoginEmailType) => Promise<void>
     logout: () => Promise<void>
     signUp: (signUpData: I_AetherscribeSignup) => Promise<void>
@@ -50,7 +48,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
             value={{
                 user,
                 isLoading,
-                isAuthenticated: !!user,
                 login,
                 logout,
                 signUp,
