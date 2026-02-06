@@ -36,14 +36,12 @@ export default function AuthRouter({ children }: I_AuthRouterProps) {
             return
         }
 
-        // 🚫 Not authenticated → ONLY auth routes allowed
         if (!user && !isAuthRoute) {
             router.replace('/login')
             setCanRender(false)
             return
         }
 
-        // 🚫 Authenticated → auth routes forbidden
         if (user && isAuthRoute) {
             router.replace('/dashboard')
             setCanRender(false)
@@ -54,7 +52,6 @@ export default function AuthRouter({ children }: I_AuthRouterProps) {
         setCanRender(true)
     }, [user, isAuthRoute, isLoading, router])
 
-    // While auth is resolving or redirecting, render nothing
     if (isLoading || !canRender) {
         return null
     }

@@ -38,34 +38,38 @@ export const signUpWithAetherscribe: RequestHandler = async (
     next
 ) => {
     const {
-        profile,
-        contact,
+        firstName,
+        lastName,
+        dateOfBirth,
+        nationality,
+        email,
         password,
         passwordConfirm,
-        aetherscribe, // { username, avatar?, subscriptionTier?, renewlCycle? }
+        username,
+        renewlCycle,
+        subscriptionTier,
     } = req.body
 
-    const { firstName, lastName, dateOfBirth, nationality } = profile
-    const { email, phoneNumber, address } = contact
-
     // Validate required fields
-    if (!firstName || !lastName || !email || !password || !passwordConfirm) {
+    if (
+        !firstName ||
+        !lastName ||
+        !email ||
+        !password ||
+        !passwordConfirm ||
+        !nationality ||
+        !dateOfBirth ||
+        !username
+    ) {
         return res.status(400).json({
-            message:
-                'Please provide: firstName, lastNames, email, password, and passwordConfirm',
-        })
-    }
-
-    if (!aetherscribe?.username) {
-        return res.status(400).json({
-            message: 'Please provide an Aetherscribe username',
+            message: 'Please provide all details',
         })
     }
 
     try {
         // Check if username is already taken
         const existingAccount = await AetherscribeAccount.findOne({
-            username: aetherscribe.username,
+            username,
         })
         if (existingAccount) {
             return res.status(400).json({
@@ -83,8 +87,6 @@ export const signUpWithAetherscribe: RequestHandler = async (
             },
             contact: {
                 email,
-                phoneNumber,
-                address: address || {},
             },
             lifecycle: {
                 status: 'active',
@@ -94,12 +96,12 @@ export const signUpWithAetherscribe: RequestHandler = async (
         })
 
         // Handle avatar
-        let avatarURL = aetherscribe.avatar
+        let avatarURL
         if (!avatarURL) {
             const result = await cloudinary.uploader.upload(
                 env.USER_DEFAULT_AVATAR,
                 {
-                    public_id: `${aetherscribe.username}_${Date.now()}`,
+                    public_id: `${username}_${Date.now()}`,
                     folder: 'aetherscribe-avatars',
                 }
             )
@@ -107,12 +109,12 @@ export const signUpWithAetherscribe: RequestHandler = async (
         }
 
         // Calculate subscription dates
-        const cycleData = calculateDatesFromCycle(aetherscribe.renewlCycle)
+        const cycleData = calculateDatesFromCycle(renewlCycle)
 
         // Create Aetherscribe account
         const newAccount = await AetherscribeAccount.create({
             identityId: newIdentity.id,
-            username: aetherscribe.username,
+            username: username,
             avatar: avatarURL,
             content: {
                 playerCharacters: [],
@@ -127,7 +129,7 @@ export const signUpWithAetherscribe: RequestHandler = async (
                 spells: [],
             },
             subscription: {
-                tier: aetherscribe.subscriptionTier || 'basic',
+                tier: subscriptionTier || 'basic',
                 status: 'active',
                 startedOn: new Date(),
                 expiresOn: cycleData.expiresOn,
@@ -155,7 +157,7 @@ export const signUpWithAetherscribe: RequestHandler = async (
             status: 'success',
             accessToken,
             identity: newIdentity.getPublicInfo(),
-            aetherscribeAccount: newAccount.getPublicInfo(),
+            accountData: newAccount.getPublicInfo(),
         })
     } catch (error) {
         console.error('Sign up with Aetherscribe error:', error)

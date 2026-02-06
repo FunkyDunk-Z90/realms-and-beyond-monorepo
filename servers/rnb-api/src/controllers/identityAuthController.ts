@@ -4,6 +4,7 @@ import { createHash } from 'crypto'
 import { env } from '../utils/validateEnv'
 import { createToken, extractToken } from '../utils/jwtTokens'
 import Identity from '../models/identityModel'
+import AetherscribeAccount from '../models/aetherscribeModel'
 
 // ---------- Sign Up (Create Identity) ----------
 export const signUpIdentity: RequestHandler = async (req, res, next) => {
@@ -105,6 +106,14 @@ export const loginIdentity: RequestHandler = async (req, res, next) => {
         identity.lastLoginAt = new Date()
         await identity.save({ validateBeforeSave: false })
 
+        const accountData = await AetherscribeAccount.findById({
+            _id: identity.aetherscribeAccount,
+        })
+
+        if (!accountData) {
+            return res.status(401).json({ message: 'Account data not found' })
+        }
+
         const accessToken = createToken(identity.id)
 
         res.cookie('jwt', accessToken, {
@@ -118,6 +127,7 @@ export const loginIdentity: RequestHandler = async (req, res, next) => {
             status: 'success',
             accessToken,
             identity: identity.getPublicInfo(),
+            accountData: accountData.getPublicInfo(),
         })
     } catch (error) {
         console.error('Login error:', error)

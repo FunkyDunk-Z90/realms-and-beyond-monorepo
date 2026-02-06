@@ -8,7 +8,6 @@ import Logo from '@/assets/aetherscribe-logo.jpg'
 
 export default function AppLayout({ children }: { children: ReactNode }) {
     const { user } = useUser()
-    console.log(user)
 
     return (
         <>

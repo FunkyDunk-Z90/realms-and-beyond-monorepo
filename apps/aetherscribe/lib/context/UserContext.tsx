@@ -1,7 +1,12 @@
 'use client'
 
 import { createContext, useContext, useState, ReactNode } from 'react'
-import { I_Identity, I_AetherscribeSignup, I_LoginEmailType } from '@rnb/types'
+import {
+    I_Identity,
+    I_AetherscribeSignup,
+    I_LoginEmailType,
+    I_AetherScribeAccountProps,
+} from '@rnb/types'
 
 import { useCheckAuthStatus } from '../hooks/useAuthStatus'
 import { useLoginFunction } from '../hooks/useLogin'
@@ -12,6 +17,7 @@ import { useRefreshUserFunction } from '../hooks/useRefreshUser'
 
 interface I_UserContextProps {
     user: I_Identity | null
+    accountData: I_AetherScribeAccountProps | null
     isLoading: boolean
     login: (formData: I_LoginEmailType) => Promise<void>
     logout: () => Promise<void>
@@ -26,6 +32,8 @@ const UserContext = createContext<I_UserContextProps | undefined>(undefined)
 
 export function UserProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<I_Identity | null>(null)
+    const [accountData, setAccountData] =
+        useState<I_AetherScribeAccountProps | null>(null)
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
 
@@ -33,9 +41,19 @@ export function UserProvider({ children }: { children: ReactNode }) {
 
     // Modular hooks
     const checkAuthStatus = useCheckAuthStatus({ setUser, setIsLoading })
-    const login = useLoginFunction({ setUser, setIsLoading, setError })
+    const login = useLoginFunction({
+        setUser,
+        setAccountData,
+        setIsLoading,
+        setError,
+    })
     const logout = useLogoutFunction({ setUser, setIsLoading, setError })
-    const signUp = useSignUpFunction({ setUser, setIsLoading, setError })
+    const signUp = useSignUpFunction({
+        setUser,
+        setAccountData,
+        setIsLoading,
+        setError,
+    })
     const updateUser = useUpdateUserFunction({
         setUser,
         setIsLoading,
@@ -47,6 +65,7 @@ export function UserProvider({ children }: { children: ReactNode }) {
         <UserContext.Provider
             value={{
                 user,
+                accountData,
                 isLoading,
                 login,
                 logout,
