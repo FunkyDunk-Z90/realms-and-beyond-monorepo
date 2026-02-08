@@ -111,6 +111,7 @@ export const Header = ({
             <div
                 className={`header-overlay ${scrollLock ? 'active' : ''}`}
             ></div>
+            <div className="header-spacer"></div>
             <div
                 className={`header-wrapper ${isHidden ? 'hidden' : ''}`}
                 ref={headerRef}

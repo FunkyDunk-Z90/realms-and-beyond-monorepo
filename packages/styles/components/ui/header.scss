@@ -4,7 +4,7 @@
 .header-wrapper {
     position: fixed;
     display: grid;
-    min-height: 80px;
+    height: 80px;
     border-bottom: 1px solid var(--primary-color);
     background-color: var(--bg-secondary-color);
     width: 100%;
@@ -13,6 +13,10 @@
     transform: translateY(0);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: transform;
+}
+
+.header-spacer {
+    height: 80px;
 }
 
 .header-contents {

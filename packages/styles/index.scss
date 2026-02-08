@@ -109,8 +109,7 @@ input::-webkit-inner-spin-button {
 .page-wrapper {
     display: grid;
     margin-block: $xLarge;
-    margin-inline: auto;
-    margin-top: calc(80px + $large);
+    margin-inline: $xLarge;
 
     @media (min-width: $tablet) {
         max-width: $desktop;
@@ -140,13 +139,16 @@ input::-webkit-inner-spin-button {
     margin: $medium;
 }
 
-.error {
-    color: var(--danger-color);
-    font-size: 1.2rem;
-    font-weight: bolder;
-    // background-color: var(--bg-color);
-    // border-radius: $border-radius;
-    // padding: $small $medium;
+.error-wrapper {
+    display: grid;
+    justify-items: start;
+    gap: $small;
+    padding: $medium;
+}
+.error-text {
+    color: var(--warning-color);
+    list-style: disc;
+    margin-left: $medium;
 }
 
 @keyframes shimmer {
