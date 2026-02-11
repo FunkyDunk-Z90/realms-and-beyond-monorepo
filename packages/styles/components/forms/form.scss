@@ -6,10 +6,13 @@
     display: grid;
     justify-items: center;
     align-items: center;
-    // height: max-content;
+    // align-self: center;
+    // height: 100%;
     max-width: $tablet;
     padding: $xLarge;
     gap: $large;
+    margin-inline: auto;
+    margin-block: auto;
 
     background-color: var(--bg-secondary-color);
 
@@ -198,4 +201,8 @@
 
 .step-dot.active {
     animation: pulse 2s ease-in-out infinite;
+}
+
+.signup-wrapper {
+    margin-block: auto;
 }

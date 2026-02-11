@@ -159,33 +159,6 @@ export default function SignUp() {
                     onNext: increaseIndex,
                 }}
             />
-            <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
-                quae veniam expedita soluta sit, necessitatibus nesciunt dolorem
-                ab inventore. Explicabo blanditiis numquam sed nobis iure atque
-                vitae saepe earum consequatur placeat quaerat adipisci sapiente
-                aspernatur dolore, aut, voluptate vel beatae sunt delectus. Quam
-                vel nemo, in odit officia quas mollitia, culpa excepturi
-                assumenda repudiandae tenetur atque. Veritatis recusandae natus
-                consequatur iure quia? Totam in at, sed cupiditate quia eius
-                debitis obcaecati sunt quam voluptatibus nam ad eaque excepturi
-                eligendi, natus distinctio tempore exercitationem dolores cumque
-                sapiente assumenda quos temporibus dicta non? Nihil et deleniti
-                aliquam hic excepturi officia ipsam voluptate ullam, quaerat
-                perferendis amet nobis architecto, quas facilis ipsa rerum
-                corporis numquam ad soluta quisquam? Eius mollitia porro,
-                corrupti dicta voluptates fugit adipisci amet odit nulla
-                inventore cum nihil veniam quaerat quasi laboriosam? Iure,
-                aliquid in quam quos accusantium dignissimos similique sed
-                maiores eum numquam deserunt delectus beatae architecto ad nemo
-                expedita, non temporibus reprehenderit error eius eaque soluta?
-                Placeat enim minima, fuga atque temporibus totam corporis unde
-                est deserunt facere animi deleniti libero sit veniam nesciunt
-                numquam vitae, accusamus cupiditate. Vero delectus ullam
-                explicabo voluptate voluptatem quaerat itaque quo fugiat
-                officia. Numquam, dolore adipisci alias illum perferendis
-                exercitationem itaque.
-            </p>
         </div>
     )
 }
