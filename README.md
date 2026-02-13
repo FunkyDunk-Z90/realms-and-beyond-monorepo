@@ -30,7 +30,7 @@ The architecture follows **domain-driven design**, **TypeScript-first modeling**
 ├── tsconfig.base.json
 └── README.md
 ```
-
+to run an app, in the root folder of the app, run the command: pnpm dev
 ---
 
 ## Core Design Principles
@@ -40,9 +40,6 @@ The architecture follows **domain-driven design**, **TypeScript-first modeling**
 
 * **Identity ≠ Account**
   A single identity can control multiple accounts.
-
-* **Explicit Schemas**
-  No loose `Object` types. All embedded documents use explicit schemas.
 
 * **Lifecycle-Aware Data**
   Soft deletes, recovery windows, and auditability are first-class.
