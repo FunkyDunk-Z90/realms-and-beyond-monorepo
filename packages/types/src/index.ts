@@ -4,6 +4,8 @@ export * from './navigationTypes'
 
 export * from './globalTypes'
 
+export * from './formData/formDataTypesIndex'
+
 export * from './users/userIndexTypes'
 export * from './personalData/personalDataTypesIndex'
 

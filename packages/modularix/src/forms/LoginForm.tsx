@@ -8,17 +8,10 @@ import { Button } from '../ui/Button'
 interface I_LoginProps {
     redirectLink: string
     login: (email: string, password: string) => Promise<void>
-    devLoginData: {
-        email: string
-        password: string
-    }
+    error?: string
 }
 
-export const LoginForm = ({
-    redirectLink,
-    login,
-    devLoginData,
-}: I_LoginProps) => {
+export const LoginForm = ({ redirectLink, login, error }: I_LoginProps) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const router = useRouter()
@@ -27,7 +20,8 @@ export const LoginForm = ({
         e.preventDefault()
 
         try {
-            await login(devLoginData.email, devLoginData.password)
+            login(email, password)
+
             router.push(`${redirectLink}`)
         } catch (err) {
             console.error('Login failed:', err)
@@ -45,7 +39,7 @@ export const LoginForm = ({
                 <input
                     className="form-input"
                     type="email"
-                    value={devLoginData.email}
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email"
                     autoComplete="off"
@@ -55,13 +49,14 @@ export const LoginForm = ({
                 <input
                     className="form-input"
                     type="password"
-                    value={devLoginData.password}
+                    value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="*********"
                     autoComplete="off"
                     autoCorrect="off"
                     required
                 />
+                {error && <p className="error">{error}</p>}
                 <Button btnType="submit" children={'Login'} />
                 <div className="form-link-wrapper">
                     <p>Don't have a Realms & Beyond account?</p>

@@ -73,5 +73,9 @@
             background-color: var(--disabled-color);
             box-shadow: 0px 1px 2px 0px var(--disabled-color);
         }
+
+        &:active {
+            transform: translateY(0);
+        }
     }
 }

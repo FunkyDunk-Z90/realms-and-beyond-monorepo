@@ -4,7 +4,7 @@ import cookieParser from 'cookie-parser'
 import morgan from 'morgan'
 
 import identityAuthRouter from './routes/identityAuthRoutes'
-import rnbAccountRouter from './routes/rnbAccountRoutes'
+import aetherscribeRouter from './routes/aetherscribeAccountRoutes'
 
 const app = express()
 
@@ -23,8 +23,6 @@ app.use(express.json({ limit: '100mb' }))
 app.use(cookieParser())
 
 app.use('/api/v1/user', identityAuthRouter)
-app.use('/api/v1/rnb-account', rnbAccountRouter)
-
-// app.use('/api/v1/users', userRouter)
+app.use('/api/v1/aetherscribe', aetherscribeRouter)
 
 export default app

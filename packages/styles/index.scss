@@ -6,13 +6,12 @@
 @use './components/button';
 
 @use './components/ui/navbar';
+@use './components/ui/header';
+@use './components/ui/footer';
 
 @use './images/images';
 
 @use './components/forms/form';
-
-@use './components/layout/header';
-@use './components/layout/footer';
 
 @use './components/cards/user-profile';
 
@@ -43,9 +42,12 @@
     --disabled-color: #{$disabled};
     --text-box: #{$light-secondary};
     --border-color: #{$border-light};
+    --blur: #{$light-blur};
     --sidebar-max: #{$sidebar-max};
     --sidebar-min: #{$sidebar-min};
     --header-height: #{$header-height};
+    --nav-height: #{$nav-height};
+    --transition-speed: #{$transition-speed};
 }
 
 @media (prefers-color-scheme: dark) {
@@ -67,6 +69,7 @@ body {
     cursor: default;
     overflow-y: auto;
     overflow-x: auto;
+    box-sizing: border-box;
 }
 
 ::-webkit-scrollbar {
@@ -93,19 +96,20 @@ input::-webkit-inner-spin-button {
 }
 
 .app-wrapper {
+    position: relative;
     display: grid;
     grid-template-rows: auto 1fr auto;
-    height: 100%;
     min-height: 100vh;
     min-height: 100dvh;
     min-height: calc(var(--vh, 1vh) * 100);
+    // padding-top: 80px;
+    z-index: 0;
 }
 
 .page-wrapper {
     display: grid;
-    margin-block: $xLarge;
+    align-items: start;
     margin-inline: auto;
-    // min-width: 100%;
 
     @media (min-width: $tablet) {
         max-width: $desktop;
@@ -133,4 +137,45 @@ input::-webkit-inner-spin-button {
 
 .section-title {
     margin: $medium;
+}
+
+.error-wrapper {
+    display: grid;
+    justify-items: start;
+    gap: $small;
+    padding: $medium;
+}
+.error-text {
+    color: var(--warning-color);
+    list-style: disc;
+    margin-left: $medium;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.skeleton {
+    position: relative;
+    overflow: hidden;
+    border-radius: $border-radius;
+}
+
+.skeleton::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--text-color),
+        transparent
+    );
+    background-size: 200% 100%;
+    animation: shimmer 4s ease-in-out infinite;
 }

@@ -1,4 +1,4 @@
 export * from './identityTypes'
 export * from './subscriptionTypes'
 export * from './nexusServeAccountTypes'
-export * from './rnbAccountTypes'
+export * from './aetherscribeAccount'

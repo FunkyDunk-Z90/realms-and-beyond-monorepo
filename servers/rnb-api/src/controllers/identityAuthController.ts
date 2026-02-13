@@ -4,6 +4,7 @@ import { createHash } from 'crypto'
 import { env } from '../utils/validateEnv'
 import { createToken, extractToken } from '../utils/jwtTokens'
 import Identity from '../models/identityModel'
+import AetherscribeAccount from '../models/aetherscribeModel'
 
 // ---------- Sign Up (Create Identity) ----------
 export const signUpIdentity: RequestHandler = async (req, res, next) => {
@@ -105,6 +106,14 @@ export const loginIdentity: RequestHandler = async (req, res, next) => {
         identity.lastLoginAt = new Date()
         await identity.save({ validateBeforeSave: false })
 
+        const accountData = await AetherscribeAccount.findById({
+            _id: identity.aetherscribeAccount,
+        })
+
+        if (!accountData) {
+            return res.status(401).json({ message: 'Account data not found' })
+        }
+
         const accessToken = createToken(identity.id)
 
         res.cookie('jwt', accessToken, {
@@ -118,6 +127,7 @@ export const loginIdentity: RequestHandler = async (req, res, next) => {
             status: 'success',
             accessToken,
             identity: identity.getPublicInfo(),
+            accountData: accountData.getPublicInfo(),
         })
     } catch (error) {
         console.error('Login error:', error)
@@ -217,7 +227,7 @@ export const forgotPassword: RequestHandler = async (req, res, next) => {
 
         const resetURL = `${req.protocol}://${req.get(
             'host'
-        )}/api/v1/identity/reset-password/${resetToken}`
+        )}/api/v1/user/reset-password/${resetToken}`
 
         const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`
 
@@ -347,7 +357,10 @@ export const updatePassword: RequestHandler = async (req, res, next) => {
 // ---------- Get My Identity ----------
 export const getMyIdentity: RequestHandler = async (req, res, next) => {
     try {
-        const identity = await Identity.findById(req.user).populate('accounts')
+        const identity = await Identity.findById(req.user).populate({
+            path: 'aetherscribeAccount',
+            select: ' -identityId -__v',
+        })
 
         if (!identity) {
             return res.status(404).json({ message: 'Identity not found' })
