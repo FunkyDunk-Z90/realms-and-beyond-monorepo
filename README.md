@@ -13,9 +13,10 @@ The architecture follows **domain-driven design**, **TypeScript-first modeling**
 ```
 /rnb
 ├── apps/
+│   ├── aetherscribe/        # TTrpg content creation
 │   ├── modularix-docs/     # Documentation page for @rnb/components
 │   ├── nexus-serve/        # Employee management system
-│   └── nexus-anvil/        # TTrpg content creation
+│   └── 
 │
 ├── packages/
 │   ├── modularix/          # @rnb/component library
